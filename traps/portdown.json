@@ -1,0 +1,11 @@
+{
+  "Class": "port",
+  "Event": "down",
+  "ElementClass": "Switch",
+  "ElementName": "sd-sf-n5k-acc-3.sd.snms",
+  "Severity": 2,
+  "EventState": "ACTIVE",
+  "ClassName": "port",
+  "InstanceName": "PORT-sd-sf-n5k-acc-3.sd.snms/436785152",
+	"Source": "DownOrFlapping"
+}

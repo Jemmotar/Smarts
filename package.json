@@ -1,0 +1,14 @@
+{
+  "name": "smarts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/main.js",
+  "scripts": {
+    "start": "node ./src/filter/transpilter.js"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.3.0"
+  }
+}
