@@ -1,4 +1,4 @@
-const Trap = new function () {
+const TrapLoader = new function () {
 	/* Private varaibles */
 	const fs = require('fs');
 	const path = require('path');
@@ -21,4 +21,4 @@ const Trap = new function () {
 	};
 }();
 
-module.exports = Trap;
+module.exports = TrapLoader;

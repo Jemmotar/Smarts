@@ -1,3 +1,3 @@
-const Trap = require('./trap/Trap.js');
+const TrapLoader = require('./trap/TrapLoader.js');
 
-console.log(Trap.get('portdown'));
+console.log(TrapLoader.get('portdown'));
