@@ -3,6 +3,7 @@
 	"stages": [
 		{
 			"target": "Source",
+			"mode": "or",
 			"conditions": [
 				{
 					"logic": "equivalent",
@@ -12,6 +13,7 @@
 		},
 		{
 			"target": "Class",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -33,6 +35,7 @@
 		},
 		{
 			"target": "Event",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -58,6 +61,7 @@
 		},
 		{
 			"target": "EventText",
+			"mode": "or",
 			"conditions": [
 				{
 					"logic": "includes",
@@ -75,6 +79,7 @@
 		},
 		{
 			"target": "InternalEventHandle",
+			"mode": "or",
 			"conditions": [
 				{
 					"logic": "regexp-match",

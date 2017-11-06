@@ -7,5 +7,6 @@
 	"ClassName": "TemperatureSensor_Fault_CiscoEntitySensor",
 	"InstanceName": "I-TemperatureSensor_Fault_CiscoEntitySensor-TEMP-gbwrqsw020argfm.argos.snms/26154",
 	"EventName": "OutOfRange",
-	"Source": "SNMS-SRShared"
+	"Source": "SNMS-SRShared",
+	"EventText": "Indicates that the temperature for this device is outside of the normal operating range."
 }

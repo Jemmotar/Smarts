@@ -1,11 +1,12 @@
 // Stage - one step (line) in filter
-const Stage = function (target, conditions = []) {
+const Stage = function (target, conditions, mode) {
 	/* Public varables */
 	this.target = target;
 	this.conditions = conditions;
+	this.mode = mode;
 
 	/* Private variables */
-	this.regexCache = {};
+	const regexCache = {};
 
 	/* Public functions */
 	this.evaluate = (trap) => {
@@ -31,19 +32,35 @@ const Stage = function (target, conditions = []) {
 
 		return {
 			results,
-			passed: results.every(
-				(r) => r.result === true
-			)
+			passed: evaluateUsingModeLogic(results)
 		};
 	};
 
 	/* Private functions */
+	function evaluateUsingModeLogic (entires) {
+		switch (mode) {
+			case 'and':
+				return entires.every(
+					(e) => e.result === true
+				);
+
+			case 'or':
+				return entires.some(
+					(e) => e.result === true
+				);
+
+			default:
+				console.log(`Error while trying to evaluate mode with type ${this.mode}, the mode definition is missing!`);
+				return null;
+		}
+	}
+
 	function getRegexp (key) {
-		if (this.regexCache[key] === undefined) {
-			this.regexCache[key] = new RegExp(key, 'g');
+		if (regexCache[key] === undefined) {
+			regexCache[key] = new RegExp(key, 'g');
 		}
 
-		return this.regexCache[key];
+		return regexCache[key];
 	}
 
 	function evaluateCondition (condition, targetValue) {
@@ -66,8 +83,11 @@ const Stage = function (target, conditions = []) {
 			case 'ends-with':
 				return targetValue.endsWith(condition.value);
 
-			case 'regexp':
+			case 'regexp-match':
 				return getRegexp(condition.value).test(targetValue);
+
+			case 'not-regexp-match':
+				return !getRegexp(condition.value).test(targetValue);
 
 			default:
 				console.log(`Error while trying to evaluate condition with logic type ${condition.logic}, the logic definition is missing!`);

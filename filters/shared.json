@@ -3,6 +3,7 @@
 	"stages": [
 		{
 			"target": "Source",
+			"mode": "or",
 			"conditions": [
 				{
 					"logic": "equivalent",
@@ -10,12 +11,13 @@
 				},
 				{
 					"logic": "equivalent",
-					"value": "SNMS-shared-PM"
+					"value": "SNMS-SRShared"
 				}
 			]
 		},
 		{
 			"target": "Class",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -29,6 +31,7 @@
 		},
 		{
 			"target": "Event",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -50,6 +53,7 @@
 		},
 		{
 			"target": "EventText",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -67,6 +71,7 @@
 		},
 		{
 			"target": "ElementName",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-equivalent",
@@ -104,6 +109,7 @@
 		},
 		{
 			"target": "InstanceName",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-regexp-match",
@@ -125,6 +131,7 @@
 		},
 		{
 			"target": "Name",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-regexp-match",
