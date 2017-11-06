@@ -55,10 +55,10 @@ const Stage = function (target, conditions = []) {
 				return targetValue !== condition.value;
 
 			case 'includes':
-				return targetValue.includs(condition.value);
+				return targetValue.includes(condition.value);
 
 			case 'not-includes':
-				return !targetValue.includs(condition.value);
+				return !targetValue.includes(condition.value);
 
 			case 'starts-with':
 				return targetValue.startsWith(condition.value);
