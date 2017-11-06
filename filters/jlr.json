@@ -1,0 +1,98 @@
+{
+	"name": "JLR",
+	"stages": [
+		{
+			"target": "Source",
+			"conditions": [
+				{
+					"logic": "equivalent",
+					"value": "SNMS-JLR"
+				}
+			]
+		},
+		{
+			"target": "Class",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "Interface"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DuplicateIP"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "TemperatureSensor"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "VoltageSensor"
+				}
+			]
+		},
+		{
+			"target": "Event",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "linkDown"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "ConfigChange"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "HighDiscardRate"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "MissingDefaultRoute"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DownOrFlapping"
+				}
+			]
+		},
+		{
+			"target": "EventText",
+			"conditions": [
+				{
+					"logic": "includes",
+					"value": "NATIVE_VLAN_MISMATCH"
+				},
+				{
+					"logic": "includes",
+					"value": "DUPLEX_MISMATCH"
+				},
+				{
+					"logic": "includes",
+					"value": "Probe_State_Change"
+				}
+			]
+		},
+		{
+			"target": "InternalEventHandle",
+			"conditions": [
+				{
+					"logic": "regexp-match",
+					"value": ".*gb014fw011jlrf7-admin.*InsufficientFreeMemory.*"
+				},
+				{
+					"logic": "regexp-match",
+					"value": ".*gb014fw011jlrf7-Internet.*InsufficientFreeMemory.*"
+				},
+				{
+					"logic": "regexp-match",
+					"value": ".*gb014fw021jlrf7-admin.*InsufficientFreeMemory.*"
+				},
+				{
+					"logic": "regexp-match",
+					"value": ".*gb014fw021jlrf7-Internet.*InsufficientFreeMemory.*"
+				}
+			]
+		}
+	]
+}
