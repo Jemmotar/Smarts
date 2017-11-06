@@ -4,11 +4,13 @@
   "description": "",
   "main": "./src/main.js",
   "scripts": {
-    "start": "node ./src/filter/transpilter.js"
+    "start": "node ./src/filter/transpilter.js",
+    "build-trap": "node ./src/trap/builder.js"
   },
   "author": "me",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.3.0"
+    "chalk": "^2.3.0",
+    "inquirer": "^3.3.0"
   }
 }
