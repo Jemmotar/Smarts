@@ -1,0 +1,11 @@
+{
+	"Class": "TemperatureSensor",
+	"Name": "TEMP-gbwrqsw020argfm.argos.snms/26154 [Ethernet1/22(ampere)-Ethernet1/22(ampere)]",
+	"Event": "OutOfRange",
+	"ElementClass": "Switch",
+	"ElementName": "gbwrqsw020argfm.argos.snms",
+	"ClassName": "TemperatureSensor_Fault_CiscoEntitySensor",
+	"InstanceName": "I-TemperatureSensor_Fault_CiscoEntitySensor-TEMP-gbwrqsw020argfm.argos.snms/26154",
+	"EventName": "OutOfRange",
+	"Source": "SNMS-SRShared"
+}

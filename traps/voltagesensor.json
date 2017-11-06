@@ -1,0 +1,11 @@
+{
+	"Class": "VoltageSensor",
+	"Name": "VOLT-gb014rt013jlrf7.jlr.snms/7012 [V2: VMB R0/11]",
+	"Event": "OutOfRange",
+	"ElementClass": "Router",
+	"ElementName": "gb014rt013jlrf7.jlr.snms",
+	"ClassName": "VoltageSensor_Fault_CiscoEntityFRU",
+	"InstanceName": "I-VoltageSensor_Fault_CiscoEntityFRU-VOLT-gb014rt013jlrf7.jlr.snms/7012",
+	"EventName": "OutOfRange",
+	"Source": "SNMS-JLR"
+}

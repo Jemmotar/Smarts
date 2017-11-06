@@ -1,0 +1,11 @@
+{
+	"Class": "SNMPTrap",
+	"Name": "IXEP59C4507-03.isabel.snms",
+	"Event": "ConfigChange",
+	"ElementClass": "Switch",
+	"ElementName": "IXEP59C4507-03.isabel.snms",
+	"ClassName": "SNMPTrap",
+	"InstanceName": "IXEP59C4507-03.isabel.snms",
+	"EventName": "ConfigChange",
+	"Source": "Trap Processor",
+}
