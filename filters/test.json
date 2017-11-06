@@ -18,7 +18,7 @@
 			"target": "Source",
 			"conditions": [
 				{
-					"logic": "equivalent",
+					"logic": "not-equivalent",
 					"value": "asdasd"
 				},
 				{

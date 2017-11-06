@@ -7,5 +7,5 @@
 	"ClassName": "SNMPTrap",
 	"InstanceName": "IXEP59C4507-03.isabel.snms",
 	"EventName": "ConfigChange",
-	"Source": "Trap Processor",
+	"Source": "Trap Processor"
 }

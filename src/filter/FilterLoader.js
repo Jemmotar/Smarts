@@ -27,7 +27,7 @@ const FilterLoader = new function () {
 				filterContent.name,
 				stages
 			);
-			
+
 			cache[location] = filter;
 		}
 
