@@ -2,7 +2,7 @@
 	"name": "O2 Port",
 	"stages": [
 		{
-			"target": "Class",
+			"target": "Source",
 			"conditions": [
 				{
 					"logic": "equivalent",

@@ -1,0 +1,37 @@
+{
+	"name": "O2 Port",
+	"stages": [
+		{
+			"target": "Source",
+			"conditions": [
+				{
+					"logic": "equivalent",
+					"value": "SNMS-o2"
+				}
+			]
+		},
+		{
+			"target": "InstanceName",
+			"conditions": [
+				{
+					"logic": "regexp-match",
+					"value": "Performance"
+				}
+			]
+		},
+		{
+			"target": "Name",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-regexp-match",
+					"value": ".*@HUP@.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*SPAN.*"
+				}
+			]
+		}
+	]
+}

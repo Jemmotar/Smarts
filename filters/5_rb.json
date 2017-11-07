@@ -1,0 +1,91 @@
+{
+	"name": "SNMS-RB",
+	"stages": [
+		{
+			"target": "Source",
+			"conditions": [
+				{
+					"logic": "equivalent",
+					"value": "SNMS-RB"
+				}
+			]
+		},
+		{
+			"target": "Event",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "HighDiscardRate"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DownOrFlapping"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "linkDown"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "ConfigChange"
+				}
+			]
+		},
+		{
+			"target": "EventText",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-regexp-match",
+					"value": "NATIVE_VLAN_MISMATCH"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": "DUPLEX_MISMATCH"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": "Probe_State_Change"
+				}
+			]
+		},
+		{
+			"target": "Name",
+			"conditions": [
+				{
+					"logic": "not-regexp-match",
+					"value": ".*Gi2/25.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*Gi2/26.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*Gi2/27.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*Gi2/28.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*VOLT-gb02qsw010rbbf7.*Te.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*VOLT-gb01qsw020rbbf7.reckitt.snms.*Te.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*VOLT-gb02qsw020rbbf7.reckitt.snms.*Te.*"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": ".*VOLT-gb01qsw010rbbf7.reckitt.snms.*Te.*"
+				},
+			]
+		}
+	]
+}

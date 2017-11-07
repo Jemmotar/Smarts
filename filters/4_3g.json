@@ -1,0 +1,68 @@
+{
+	"name": "3g",
+	"stages": [
+		{
+			"target": "Source",
+			"conditions": [
+				{
+					"logic": "equivalent",
+					"value": "SNMS-3g"
+				}
+			]
+		},
+		{
+			"target": "Class",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "TemperatureSensor"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DuplicateIP"
+				}
+			]
+		},
+		{
+			"target": "Event",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "linkDown"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "ConfigChange"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "HighDiscardRate"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "MissingDefaultRoute"
+				}
+			]
+		},
+		{
+			"target": "EventText",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-regexp-matcht",
+					"value": "NATIVE_VLAN_MISMATCH"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": "DUPLEX_MISMATCH"
+				},
+				{
+					"logic": "not-regexp-match",
+					"value": "Probe_State_Change"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,69 @@
+{
+	"name": "SNMS-shared",
+	"stages": [
+		{
+			"target": "Source",
+			"conditions": [
+				{
+					"logic": "equivalent",
+					"value": "SNMS-DCNV"
+				}
+			]
+		},
+		{
+			"target": "Class",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "Interface"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DuplicateIP"
+					
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "TemperatureSensor"
+				}
+			]
+		},
+		{
+			"target": "Event",
+			"mode": "and",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "linkDown"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "ConfigChange"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "HighDiscardRate"
+				}
+			]
+		},
+		{
+			"target": "EventText",
+			"mode": "or",
+			"conditions": [
+				{
+					"logic": "not-equivalent",
+					"value": "NATIVE_VLAN_MISMATCH"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "DUPLEX_MISMATCH"
+				},
+				{
+					"logic": "not-equivalent",
+					"value": "Probe_State_Change"
+				}
+			]
+		}		
+	]
+}
