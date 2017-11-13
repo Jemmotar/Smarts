@@ -3,7 +3,7 @@ const Stage = function (target, conditions, mode) {
 	/* Public varables */
 	this.target = target;
 	this.conditions = conditions;
-	this.mode = mode;
+	this.mode = mode === null ? 'or' : mode;
 
 	/* Private variables */
 	const regexCache = {};
