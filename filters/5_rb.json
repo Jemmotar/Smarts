@@ -52,6 +52,7 @@
 		},
 		{
 			"target": "Name",
+			"mode": "and",
 			"conditions": [
 				{
 					"logic": "not-regexp-match",
@@ -84,7 +85,7 @@
 				{
 					"logic": "not-regexp-match",
 					"value": ".*VOLT-gb01qsw010rbbf7.reckitt.snms.*Te.*"
-				},
+				}
 			]
 		}
 	]

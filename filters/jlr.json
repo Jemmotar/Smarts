@@ -3,7 +3,6 @@
 	"stages": [
 		{
 			"target": "Source",
-			"mode": "or",
 			"conditions": [
 				{
 					"logic": "equivalent",
