@@ -1,10 +1,11 @@
-
+import fs from 'fs';
+import path from 'path';
 import Filter from './Filter';
 import Stage from './Stage';
 
 const FilterLoader = new function () {
 	/* Private varaibles */
-	const path = require('path');
+	const filterDir = path.join(__dirname, '/../../filters');
 	const cache = {};
 
 	/* Private functions */
@@ -14,7 +15,7 @@ const FilterLoader = new function () {
 
 	/* Public functions */
 	this.get = function (filterName) {
-		const location = path.join(__dirname, '/../../filters/' + filterName + '.json');
+		const location = path.join(filterDir, filterName + '.json');
 
 		if (cache[location] === undefined) {
 			const filterContent = read(location);
@@ -32,6 +33,13 @@ const FilterLoader = new function () {
 		}
 
 		return cache[location];
+	};
+
+	this.getNames = function () {
+		return fs
+			.readdirSync(filterDir)
+			.filter((file) => file.includes('.json'))
+			.map((file) => file.replace('.json', ''));
 	};
 }();
 
