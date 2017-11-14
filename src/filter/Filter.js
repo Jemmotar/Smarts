@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+import chalk from 'chalk';
 
 const Filter = function (name, stages = []) {
 	/* Public varables */
@@ -48,4 +48,4 @@ const Filter = function (name, stages = []) {
 	}
 };
 
-module.exports = Filter;
+export default Filter;

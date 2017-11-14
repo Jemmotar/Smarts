@@ -1,9 +1,9 @@
-const Filter = require('./Filter');
-const Stage = require('./Stage');
+
+import Filter from './Filter';
+import Stage from './Stage';
 
 const FilterLoader = new function () {
 	/* Private varaibles */
-	const fs = require('fs');
 	const path = require('path');
 	const cache = {};
 
@@ -35,4 +35,4 @@ const FilterLoader = new function () {
 	};
 }();
 
-module.exports = FilterLoader;
+export default FilterLoader;

@@ -96,4 +96,4 @@ const Stage = function (target, conditions, mode) {
 	}
 };
 
-module.exports = Stage;
+export default Stage;

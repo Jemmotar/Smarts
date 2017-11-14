@@ -1,6 +1,7 @@
+import fs from 'fs';
+
 const TrapLoader = new function () {
 	/* Private varaibles */
-	const fs = require('fs');
 	const path = require('path');
 	const cache = {};
 
@@ -21,4 +22,4 @@ const TrapLoader = new function () {
 	};
 }();
 
-module.exports = TrapLoader;
+export default TrapLoader;
