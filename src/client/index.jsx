@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import FilterMenu from './component/FilterMenu.jsx';
+import App from './component/App.jsx';
 
-ReactDOM.render(<FilterMenu />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

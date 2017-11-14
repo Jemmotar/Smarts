@@ -6,9 +6,11 @@ export default class FilterMenu extends Component {
 	constructor (props) {
 		super(props);
 
+		const filters = FilterLoader.getNames();
+
 		this.state = {
-			activeFilter: 'O2',
-			filters: FilterLoader.getNames()
+			activeFilter: undefined,
+			filters: filters
 		};
 
 		this.handleItemClick = (e, { name }) => this.selectFilter(name);
@@ -18,6 +20,8 @@ export default class FilterMenu extends Component {
 		this.setState({
 			activeFilter: name
 		});
+
+		this.props.onFilterSelected(name);
 	}
 
 	render () {
