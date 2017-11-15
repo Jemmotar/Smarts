@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 
 export default class FilterMenu extends Component {
@@ -37,11 +37,7 @@ export default class FilterMenu extends Component {
 		const { activeFilter, filters } = this.state;
 
 		return (
-			<Menu tabular attached="top">
-				<Menu.Item>
-					<Icon name="filter" size="large" />
-				</Menu.Item>
-
+			<Menu secondary>
 				{filters.map((filter, index) => (
 					<Menu.Item name={filter} key={index} active={activeFilter === filter} onClick={this.handleItemClick} />
 				))}

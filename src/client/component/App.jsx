@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Grid } from 'semantic-ui-react';
 import FilterMenu from './FilterMenu.jsx';
 import FilterContent from './FilterContent.jsx';
 
@@ -23,10 +24,14 @@ export default class App extends Component {
 		const { filter } = this.state;
 
 		return (
-			<span>
-				<FilterMenu onFilterSelected={this.selectFilter} />
-				<FilterContent filter={filter} />
-			</span>
+			<Grid>
+				<Grid.Row>
+					<FilterMenu onFilterSelected={this.selectFilter} />
+				</Grid.Row>
+				<Grid.Row>
+					<FilterContent filter={filter} />
+				</Grid.Row>
+			</Grid>
 		);
 	}
 }
