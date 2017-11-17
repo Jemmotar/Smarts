@@ -17,6 +17,15 @@ export default class StageMenu extends Component {
 		this.setState({
 			activeStage: index
 		});
+
+		this.props.onStageSelection(index);
+	}
+
+	componentWillReceiveProps (nextProps) {
+		// Reset selected stage if filter is switched
+		if (this.props.filter !== nextProps.filter) {
+			this.selectStage(0);
+		}
 	}
 
 	render () {
