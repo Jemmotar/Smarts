@@ -32,7 +32,7 @@ export default class FilterContent extends Component {
 		const { filter } = this.props;
 
 		return (
-			<Grid columns={2} stretched style={{height: 'calc(100% - 43px)'}}>
+			<Grid columns={2} stretched style={{height: 'calc(100% - 73px)'}}>
 				<Grid.Row>
 					<Grid.Column style={{width: '240px'}}>
 						<StageMenu filter={filter} activeStageIndex={activeStageIndex} onStageSelection={this.selectStage} />

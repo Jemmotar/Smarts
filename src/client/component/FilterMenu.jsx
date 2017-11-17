@@ -8,6 +8,7 @@ export default class FilterMenu extends Component {
 		super(props);
 
 		this.handleItemClick = (e, { name }) => this.props.onFilterSelected(name);
+		this.handleTrapSelection = (e, { value }) => this.props.onTrapSelected(value);
 	}
 
 	render () {
@@ -31,7 +32,7 @@ export default class FilterMenu extends Component {
 
 				<Menu.Menu position="right">
 					<Menu.Item>
-						<Select placeholder="Vyber trapku" options={traps} />
+						<Select placeholder="Vyber trapku" options={traps} onChange={this.handleTrapSelection} />
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>

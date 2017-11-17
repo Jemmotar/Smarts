@@ -1,30 +1,21 @@
-import chalk from 'chalk';
+import EvaluationResult from './EvaluationResult.js';
 
 const Filter = function (name, stages = []) {
-	/* Public varables */
+	/* Public variables */
 	this.name = name;
 	this.stages = stages;
 
 	/* Public functions */
-	this.push = (trap) => {
-		const stageResults = [];
+	this.evaluate = (trap) => {
+		const evaluation = new EvaluationResult(this, trap);
 
-		console.log(`Trying to push trap thought ${chalk.yellow(this.name)} filter:`);
-		this.stages.forEach((stage) => {
-			// Evaluate the trap agains stage
-			const evaluation = stage.evaluate(trap);
+		this.stages.forEach(
+			(stage) => stage.evaluate(evaluation)
+		);
 
-			// Save stage result
-			stageResults.push(evaluation);
-		});
+		evaluation.build();
 
-		const passedFilter = stageResults.every((r) => r.result === true);
-		console.log(passedFilter);
-
-		return {
-			results: stageResults,
-			passed: passedFilter
-		};
+		return evaluation;
 	};
 };
 

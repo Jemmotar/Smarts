@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import FilterMenu from './FilterMenu.jsx';
-import FilterLoader from '~/src/filter/FilterLoader.js';
 import FilterContent from './FilterContent.jsx';
+import PopupMessage from './PopupMessage.jsx';
+
+import FilterLoader from '~/src/filter/FilterLoader.js';
+import TrapLoader from '~/src/trap/TrapLoader.js';
 
 export default class App extends Component {
 	constructor (props) {
 		super(props);
 
 		this.state = {
-			activeFilter: FilterLoader.getNames()[0]
+			activeFilter: FilterLoader.getNames()[0],
+			activeTrap: undefined,
+			evaluations: {}
 		};
 
 		this.selectFilter = this.selectFilter.bind(this);
+		this.selectTrap = this.selectTrap.bind(this);
 	}
 
 	selectFilter (name) {
@@ -20,12 +26,25 @@ export default class App extends Component {
 		});
 	}
 
+	selectTrap (name) {
+		const evaluations = {};
+
+		FilterLoader.getNames().forEach((filter) => {
+			evaluations[filter] = FilterLoader.get(filter).evaluate(TrapLoader.get(name));
+		});
+
+		this.setState({
+			activeTrap: name,
+			evaluations
+		});
+	}
+
 	render () {
-		const { activeFilter } = this.state;
+		const { activeFilter, evaluations } = this.state;
 
 		return (
 			<span>
-				<FilterMenu filter={activeFilter} onFilterSelected={this.selectFilter} />
+				<FilterMenu filter={activeFilter} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
 				<FilterContent filter={activeFilter} />
 			</span>
 		);

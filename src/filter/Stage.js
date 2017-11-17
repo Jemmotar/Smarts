@@ -1,6 +1,6 @@
 // Stage - one step (line) in filter
 const Stage = function (target, conditions, mode) {
-	/* Public varables */
+	/* Public variables */
 	this.target = target;
 	this.conditions = conditions;
 	this.mode = mode === undefined ? 'or' : mode;
@@ -9,35 +9,30 @@ const Stage = function (target, conditions, mode) {
 	const regexCache = {};
 
 	/* Public functions */
-	this.evaluate = (trap) => {
-		const targetValue = trap[this.target];
+	this.evaluate = (evaluation) => {
+		// Set source for evaluation
+		evaluation.setSource(this);
 
+		// Get trap target value
+		const targetValue = evaluation.trap[this.target];
+
+		// Check if target trap value is valid
 		if (targetValue === undefined) {
-			console.log(`Error while trying to evaluate trap with attribute ${this.target}, the attribute is missing!`);
+			evaluation.addError(`Error while trying to evaluate trap with attribute ${this.target}, the attribute is missing!`);
 			return;
 		}
 
-		const results = this.conditions.map(
-			(condition) => {
-				return {
-					condition,
-					attribute: {
-						target: this.target,
-						value: targetValue
-					},
-					result: evaluateCondition(condition, targetValue)
-				};
-			}
+		// Evaluate each condition
+		const conditionResults = this.conditions.map(
+			(condition) => evaluateCondition(condition, targetValue, evaluation)
 		);
 
-		return {
-			results,
-			passed: evaluateUsingModeLogic(results, this.mode)
-		};
+		// Evaluate if this stage was passed
+		evaluation.addStageResult(getModeResult(conditionResults, this.mode));
 	};
 
 	/* Private functions */
-	function evaluateUsingModeLogic (entires, mode) {
+	function getModeResult (entires, mode, evaluation) {
 		switch (mode) {
 			case 'and':
 				return entires.every(
@@ -50,7 +45,7 @@ const Stage = function (target, conditions, mode) {
 				);
 
 			default:
-				console.log(`Error while trying to evaluate mode with type ${mode}, the mode definition is missing!`);
+				evaluation.addError(`Error while trying to evaluate mode with type ${mode}, the mode definition is missing!`);
 				return null;
 		}
 	}
@@ -63,36 +58,49 @@ const Stage = function (target, conditions, mode) {
 		return regexCache[key];
 	}
 
-	function evaluateCondition (condition, targetValue) {
+	function evaluateCondition (condition, targetValue, evaluation) {
+		let result = null;
+
 		switch (condition.logic) {
 			case 'equivalent':
-				return targetValue === condition.value;
+				result = targetValue === condition.value;
+				break;
 
 			case 'not-equivalent':
-				return targetValue !== condition.value;
+				result = targetValue !== condition.value;
+				break;
 
 			case 'includes':
-				return targetValue.includes(condition.value);
+				result = targetValue.includes(condition.value);
+				break;
 
 			case 'not-includes':
-				return !targetValue.includes(condition.value);
+				result = !targetValue.includes(condition.value);
+				break;
 
 			case 'starts-with':
-				return targetValue.startsWith(condition.value);
+				result = targetValue.startsWith(condition.value);
+				break;
 
 			case 'ends-with':
-				return targetValue.endsWith(condition.value);
+				result = targetValue.endsWith(condition.value);
+				break;
 
 			case 'regexp-match':
-				return getRegexp(condition.value).test(targetValue);
+				result = getRegexp(condition.value).test(targetValue);
+				break;
 
 			case 'not-regexp-match':
-				return !getRegexp(condition.value).test(targetValue);
+				result = !getRegexp(condition.value).test(targetValue);
+				break;
 
 			default:
-				console.log(`Error while trying to evaluate condition with logic type ${condition.logic}, the logic definition is missing!`);
+				evaluation.addError(`Error while trying to evaluate condition with logic type ${condition.logic}, the logic definition is missing!`);
 				return null;
 		}
+
+		evaluation.addConditionResult(result);
+		return result;
 	}
 };
 
