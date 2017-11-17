@@ -9,15 +9,28 @@ export default class StageMenu extends Component {
 		this.handleStageSelection = (e) => this.props.onStageSelection(parseInt(e.target.attributes['data-index'].value));
 	}
 
+	getLabelColor (evaluation, stage) {
+		if (!evaluation || !evaluation.results[stage.target]) {
+			return 'grey';
+		}
+
+		if (evaluation.results[stage.target].errors.length > 0) {
+			return 'yellow';
+		}
+
+		return evaluation.results[stage.target].passed ? 'green' : 'red';
+	}
+
 	render () {
-		const { filter, activeStageIndex } = this.props;
+		const { filter, activeStageIndex, evaluation } = this.props;
 
 		return (
 			<Menu pointing secondary vertical>
 				{filter && FilterLoader.get(filter).stages.map((stage, index) => (
 					<Menu.Item key={index} data-index={index} active={activeStageIndex === index} name={stage.target} onClick={this.handleStageSelection}>
 						{stage.target}
-						<Label>{stage.conditions.length}</Label>
+						<Label size="mini">{stage.conditions.length}</Label>
+						<Label circular empty color={this.getLabelColor(evaluation, stage)} />
 					</Menu.Item>
 				))}
 			</Menu>

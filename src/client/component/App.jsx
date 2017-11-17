@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import FilterMenu from './FilterMenu.jsx';
 import FilterContent from './FilterContent.jsx';
-import PopupMessage from './PopupMessage.jsx';
-
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
 
@@ -37,6 +35,8 @@ export default class App extends Component {
 			activeTrap: name,
 			evaluations
 		});
+
+		console.log(evaluations);
 	}
 
 	render () {
@@ -44,8 +44,8 @@ export default class App extends Component {
 
 		return (
 			<span>
-				<FilterMenu filter={activeFilter} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
-				<FilterContent filter={activeFilter} />
+				<FilterMenu filter={activeFilter} evaluations={evaluations} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
+				<FilterContent filter={activeFilter} evaluation={evaluations[activeFilter]} />
 			</span>
 		);
 	}

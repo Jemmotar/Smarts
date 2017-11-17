@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Select } from 'semantic-ui-react';
+import { Menu, Label, Select } from 'semantic-ui-react';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
 
@@ -11,7 +11,20 @@ export default class FilterMenu extends Component {
 		this.handleTrapSelection = (e, { value }) => this.props.onTrapSelected(value);
 	}
 
+	getLabelColor (evaluation) {
+		if (!evaluation) {
+			return 'grey';
+		}
+
+		if (evaluation.errors.length > 0) {
+			return 'yellow';
+		}
+
+		return evaluation.passed ? 'green' : 'red';
+	}
+
 	render () {
+		const { evaluations } = this.props;
 		const activeFilter = this.props.filter;
 
 		const traps = TrapLoader.getNames().map((trap) => {
@@ -27,6 +40,7 @@ export default class FilterMenu extends Component {
 				{FilterLoader.getNames().map((filter, index) => (
 					<Menu.Item name={filter} key={index} active={activeFilter === filter} onClick={this.handleItemClick}>
 						{filter}
+						<Label circular empty color={this.getLabelColor(evaluations[filter])} />
 					</Menu.Item>
 				))}
 

@@ -29,17 +29,17 @@ export default class FilterContent extends Component {
 
 	render () {
 		const { activeStageIndex } = this.state;
-		const { filter } = this.props;
+		const { filter, evaluation } = this.props;
 
 		return (
 			<Grid columns={2} stretched style={{height: 'calc(100% - 73px)'}}>
 				<Grid.Row>
 					<Grid.Column style={{width: '240px'}}>
-						<StageMenu filter={filter} activeStageIndex={activeStageIndex} onStageSelection={this.selectStage} />
+						<StageMenu filter={filter} activeStageIndex={activeStageIndex} evaluation={evaluation} onStageSelection={this.selectStage} />
 					</Grid.Column>
 
 					<Grid.Column style={{width: 'calc(100% - 270px)'}}>
-						<StageContent filter={filter} activeStageIndex={activeStageIndex} />
+						<StageContent filter={filter} activeStageIndex={activeStageIndex} evaluation={evaluation} />
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

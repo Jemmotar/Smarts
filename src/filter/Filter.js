@@ -10,10 +10,14 @@ const Filter = function (name, stages = []) {
 		const evaluation = new EvaluationResult(this, trap);
 
 		this.stages.forEach(
-			(stage) => stage.evaluate(evaluation)
+			(stage) => {
+				evaluation.beginStage(stage);
+				stage.evaluate(evaluation);
+				evaluation.endStage();
+			}
 		);
 
-		evaluation.build();
+		evaluation.finalize();
 
 		return evaluation;
 	};

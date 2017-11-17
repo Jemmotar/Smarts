@@ -10,15 +10,13 @@ const Stage = function (target, conditions, mode) {
 
 	/* Public functions */
 	this.evaluate = (evaluation) => {
-		// Set source for evaluation
-		evaluation.setSource(this);
-
 		// Get trap target value
 		const targetValue = evaluation.trap[this.target];
 
 		// Check if target trap value is valid
 		if (targetValue === undefined) {
 			evaluation.addError(`Error while trying to evaluate trap with attribute ${this.target}, the attribute is missing!`);
+			evaluation.getCurrentStage().addConditionResult('error');
 			return;
 		}
 
@@ -28,7 +26,9 @@ const Stage = function (target, conditions, mode) {
 		);
 
 		// Evaluate if this stage was passed
-		evaluation.addStageResult(getModeResult(conditionResults, this.mode));
+		evaluation.getCurrentStage().setStageResult(
+			getModeResult(conditionResults, this.mode, evaluation)
+		);
 	};
 
 	/* Private functions */
@@ -36,12 +36,12 @@ const Stage = function (target, conditions, mode) {
 		switch (mode) {
 			case 'and':
 				return entires.every(
-					(e) => e.result === true
+					(e) => e === true
 				);
 
 			case 'or':
 				return entires.some(
-					(e) => e.result === true
+					(e) => e === true
 				);
 
 			default:
@@ -99,7 +99,7 @@ const Stage = function (target, conditions, mode) {
 				return null;
 		}
 
-		evaluation.addConditionResult(result);
+		evaluation.getCurrentStage().addConditionResult(result);
 		return result;
 	}
 };

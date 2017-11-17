@@ -3,47 +3,58 @@ const EvaluationResult = function (filter, trap) {
 	this.filter = filter;
 	this.trap = trap;
 	this.errors = [];
-	this.result = [];
+	this.results = {};
+	this.passed = undefined;
 
 	/* Private variables */
-	let currentSource = null;
-	let currentBlob = null;
+	let current = this;
 
 	/* Public functions */
-	this.build = () => {
-		if (currentBlob !== null) {
-			this.result.push(currentBlob);
-		}
+	this.beginStage = (stage) => {
+		current = new StageEvaluationResult(stage);
 	};
 
-	this.setSource = (source) => {
-		if (currentSource !== source) {
-			this.build();
-			currentBlob = {};
-			currentSource = source;
-		}
+	this.endStage = () => {
+		this.results[current.stage.target] = current;
+	};
+
+	this.getCurrentStage = () => {
+		return current;
 	};
 
 	this.addError = (text) => {
+		// Add error to global pool
 		this.errors.push({
-			source: currentSource,
-			text
+			source: current,
+			text: text
 		});
+
+		// Add error to local pool
+		current.errors.push(text);
 	};
 
-	this.addConditionResult = (condition, result) => {
-		if (currentBlob.results === undefined) {
-			currentBlob.results = [];
-		}
+	this.finalize = () => {
+		current = null;
+		this.passed = Object.values(this.results).every(
+			(s) => s.passed === true
+		);
+	};
+};
 
-		currentBlob.results.push({
-			condition,
-			result
-		});
+const StageEvaluationResult = function (stage) {
+	/* Public variables */
+	this.stage = stage;
+	this.conditions = [];
+	this.passed = undefined;
+	this.errors = [];
+
+	/* Public functions */
+	this.addConditionResult = (result) => {
+		this.conditions.push(result);
 	};
 
-	this.addStageResult = (result) => {
-		currentBlob.passed = result;
+	this.setStageResult = (result) => {
+		this.passed = result;
 	};
 };
 
