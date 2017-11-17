@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterMenu from './FilterMenu.jsx';
+import FilterLoader from '~/src/filter/FilterLoader.js';
 import FilterContent from './FilterContent.jsx';
 
 export default class App extends Component {
@@ -7,7 +8,7 @@ export default class App extends Component {
 		super(props);
 
 		this.state = {
-			filter: undefined
+			activeFilter: FilterLoader.getNames()[0]
 		};
 
 		this.selectFilter = this.selectFilter.bind(this);
@@ -15,17 +16,17 @@ export default class App extends Component {
 
 	selectFilter (name) {
 		this.setState({
-			filter: name
+			activeFilter: name
 		});
 	}
 
 	render () {
-		const { filter } = this.state;
+		const { activeFilter } = this.state;
 
 		return (
 			<span>
-				<FilterMenu onFilterSelected={this.selectFilter} />
-				<FilterContent filter={filter} />
+				<FilterMenu filter={activeFilter} onFilterSelected={this.selectFilter} />
+				<FilterContent filter={activeFilter} />
 			</span>
 		);
 	}

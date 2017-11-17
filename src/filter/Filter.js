@@ -15,37 +15,17 @@ const Filter = function (name, stages = []) {
 			const evaluation = stage.evaluate(trap);
 
 			// Save stage result
-			stageResults.push(evaluation.result);
-
-			// Log first result with stage name
-			console.log(' - Stage ' + chalk[evaluation.passed ? 'bgGreen' : 'bgRed'](stage.target) + ' ' + buildConditionLog(evaluation.results[0]));
-
-			// Print evaluation results for each condition
-			evaluation.results.forEach((conditionEvaluation, index) => {
-				// Do not log the first result again
-				if (index === 0) {
-					return;
-				}
-
-				console.log(' '.repeat(10 + conditionEvaluation.attribute.target.length) + buildConditionLog(conditionEvaluation));
-			});
-
-			// Space between stages
-			console.log('');
+			stageResults.push(evaluation);
 		});
 
-		const passedThoughFilter = stageResults.every((r) => r === true);
-		console.log('Trap ' + buildResultLog(passedThoughFilter));
+		const passedFilter = stageResults.every((r) => r.result === true);
+		console.log(passedFilter);
+
+		return {
+			results: stageResults,
+			passed: passedFilter
+		};
 	};
-
-	/* Private functions */
-	function buildConditionLog (evaluation) {
-		return 'is ' + chalk[evaluation.result ? 'bgGreen' : 'bgRed'](evaluation.condition.logic + ' to "' + evaluation.condition.value + '"');
-	}
-
-	function buildResultLog (result) {
-		return result.passed ? chalk.greenBright('PASSED') : chalk.redBright('DETAINED');
-	}
 };
 
 export default Filter;

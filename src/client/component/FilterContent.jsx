@@ -8,7 +8,7 @@ export default class FilterContent extends Component {
 		super(props);
 
 		this.state = {
-			activeStage: 0
+			activeStageIndex: 0
 		};
 
 		this.selectStage = this.selectStage.bind(this);
@@ -16,27 +16,33 @@ export default class FilterContent extends Component {
 
 	selectStage (index) {
 		this.setState({
-			activeStage: index
+			activeStageIndex: index
 		});
 	}
 
+	componentWillReceiveProps (nextProps) {
+		// Reset selected stage after filter is switched
+		if (this.props.filter !== nextProps.filter) {
+			this.selectStage(0);
+		}
+	}
+
 	render () {
-		const { activeStage } = this.state;
+		const { activeStageIndex } = this.state;
 		const { filter } = this.props;
-		const stages = filter ? FilterLoader.get(filter).stages : [];
-		console.log();
+		const stages = FilterLoader.get(filter).stages;
 
 		return (
 			<Grid columns={2} stretched style={{height: 'calc(100% - 43px)'}}>
 				<Grid.Row>
 					<Grid.Column style={{width: '240px'}}>
-						<StageMenu filter={filter} onStageSelection={this.selectStage} />
+						<StageMenu filter={filter} activeStageIndex={activeStageIndex} onStageSelection={this.selectStage} />
 					</Grid.Column>
 
 					<Grid.Column style={{width: 'calc(100% - 270px)'}}>
-						{stages.length > 0 && stages.length - 1 >= activeStage &&
+						{stages.length - 1 >= activeStageIndex &&
 							<Item.Group divided>
-								{stages[activeStage].conditions.map((c, index) => (
+								{stages[activeStageIndex].conditions.map((c, index) => (
 									<Item key={index}>
 										<Item.Content verticalAlign="middle" key={index}>
 											<Item.Header>{c.value}</Item.Header>

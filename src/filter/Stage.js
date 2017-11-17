@@ -3,7 +3,7 @@ const Stage = function (target, conditions, mode) {
 	/* Public varables */
 	this.target = target;
 	this.conditions = conditions;
-	this.mode = mode === null ? 'or' : mode;
+	this.mode = mode === undefined ? 'or' : mode;
 
 	/* Private variables */
 	const regexCache = {};
@@ -32,12 +32,12 @@ const Stage = function (target, conditions, mode) {
 
 		return {
 			results,
-			passed: evaluateUsingModeLogic(results)
+			passed: evaluateUsingModeLogic(results, this.mode)
 		};
 	};
 
 	/* Private functions */
-	function evaluateUsingModeLogic (entires) {
+	function evaluateUsingModeLogic (entires, mode) {
 		switch (mode) {
 			case 'and':
 				return entires.every(
@@ -50,7 +50,7 @@ const Stage = function (target, conditions, mode) {
 				);
 
 			default:
-				console.log(`Error while trying to evaluate mode with type ${this.mode}, the mode definition is missing!`);
+				console.log(`Error while trying to evaluate mode with type ${mode}, the mode definition is missing!`);
 				return null;
 		}
 	}
