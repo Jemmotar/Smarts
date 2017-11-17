@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Item } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import StageMenu from './StageMenu.jsx';
-import FilterLoader from '~/src/filter/FilterLoader.js';
+import StageContent from './StageContent.jsx';
 
 export default class FilterContent extends Component {
 	constructor (props) {
@@ -30,7 +30,6 @@ export default class FilterContent extends Component {
 	render () {
 		const { activeStageIndex } = this.state;
 		const { filter } = this.props;
-		const stages = FilterLoader.get(filter).stages;
 
 		return (
 			<Grid columns={2} stretched style={{height: 'calc(100% - 43px)'}}>
@@ -40,18 +39,7 @@ export default class FilterContent extends Component {
 					</Grid.Column>
 
 					<Grid.Column style={{width: 'calc(100% - 270px)'}}>
-						{stages.length - 1 >= activeStageIndex &&
-							<Item.Group divided>
-								{stages[activeStageIndex].conditions.map((c, index) => (
-									<Item key={index}>
-										<Item.Content verticalAlign="middle" key={index}>
-											<Item.Header>{c.value}</Item.Header>
-											<Item.Description>{c.logic}</Item.Description>
-										</Item.Content>
-									</Item>
-								))}
-							</Item.Group>
-						}
+						<StageContent filter={filter} activeStageIndex={activeStageIndex} />
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
