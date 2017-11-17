@@ -1,9 +1,10 @@
 import fs from 'fs';
+import path from 'path';
 
 const TrapLoader = new function () {
 	/* Private varaibles */
-	const path = require('path');
 	const cache = {};
+	const trapDir = path.join(__dirname, '/../../traps');
 
 	/* Private functions */
 	function read (location) {
@@ -12,13 +13,24 @@ const TrapLoader = new function () {
 
 	/* Public functions */
 	this.get = function (trapName) {
-		const location = path.join(__dirname, '/../../traps/' + trapName + '.json');
+		const location = path.join(trapDir, trapName + '.json');
 
 		if (cache[location] === undefined) {
 			cache[location] = read(location);
 		}
 
 		return cache[location];
+	};
+
+	this.getNames = function () {
+		if (cache.files === undefined) {
+			cache.files = fs
+				.readdirSync(trapDir)
+				.filter((file) => file.includes('.json'))
+				.map((file) => file.replace('.json', ''));
+		}
+
+		return cache.files;
 	};
 }();
 

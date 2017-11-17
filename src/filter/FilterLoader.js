@@ -36,10 +36,14 @@ const FilterLoader = new function () {
 	};
 
 	this.getNames = function () {
-		return fs
-			.readdirSync(filterDir)
-			.filter((file) => file.includes('.json'))
-			.map((file) => file.replace('.json', ''));
+		if (cache.files === undefined) {
+			cache.files = fs
+				.readdirSync(filterDir)
+				.filter((file) => file.includes('.json'))
+				.map((file) => file.replace('.json', ''));
+		}
+
+		return cache.files;
 	};
 }();
 

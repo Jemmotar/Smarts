@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Select } from 'semantic-ui-react';
 import FilterLoader from '~/src/filter/FilterLoader.js';
+import TrapLoader from '~/src/trap/TrapLoader.js';
 
 export default class FilterMenu extends Component {
 	constructor (props) {
@@ -12,6 +13,14 @@ export default class FilterMenu extends Component {
 	render () {
 		const activeFilter = this.props.filter;
 
+		const traps = TrapLoader.getNames().map((trap) => {
+			return {
+				key: trap,
+				value: trap,
+				text: trap
+			};
+		});
+
 		return (
 			<Menu tabular>
 				{FilterLoader.getNames().map((filter, index) => (
@@ -19,6 +28,12 @@ export default class FilterMenu extends Component {
 						{filter}
 					</Menu.Item>
 				))}
+
+				<Menu.Menu position="right">
+					<Menu.Item>
+						<Select placeholder="Vyber trapku" options={traps} />
+					</Menu.Item>
+				</Menu.Menu>
 			</Menu>
 		);
 	}
