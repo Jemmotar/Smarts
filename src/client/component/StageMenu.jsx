@@ -22,7 +22,7 @@ export default class StageMenu extends Component {
 	}
 
 	componentWillReceiveProps (nextProps) {
-		// Reset selected stage if filter is switched
+		// Reset selected stage after filter is switched
 		if (this.props.filter !== nextProps.filter) {
 			this.selectStage(0);
 		}

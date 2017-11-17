@@ -9,20 +9,16 @@ export default class FilterMenu extends Component {
 		const filters = FilterLoader.getNames();
 
 		this.state = {
-			activeFilter: undefined,
-			filters: filters
+			filters: filters,
+			activeFilter: filters.length >= 0 ? filters[0] : undefined
 		};
 
 		this.handleItemClick = (e, { name }) => this.selectFilter(name);
 	}
 
 	componentDidMount () {
-		const { filters } = this.state;
-
-		// Select the first filter as default
-		if (filters.length > 0) {
-			this.selectFilter(filters[0]);
-		}
+		// Dispatch default state to other components
+		this.props.onFilterSelected(this.state.activeFilter);
 	}
 
 	selectFilter (name) {
