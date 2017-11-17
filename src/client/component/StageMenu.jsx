@@ -33,7 +33,7 @@ export default class StageMenu extends Component {
 		const { activeStage } = this.state;
 
 		return (
-			<Menu fluid vertical tabular>
+			<Menu pointing secondary vertical>
 				{filter && FilterLoader.get(filter).stages.map((stage, index) => (
 					<Menu.Item key={index} data-index={index} active={activeStage === index} name={stage.target} onClick={this.handleStageSelection} />
 				))}

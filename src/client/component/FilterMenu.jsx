@@ -33,7 +33,7 @@ export default class FilterMenu extends Component {
 		const { activeFilter, filters } = this.state;
 
 		return (
-			<Menu secondary>
+			<Menu tabular>
 				{filters.map((filter, index) => (
 					<Menu.Item name={filter} key={index} active={activeFilter === filter} onClick={this.handleItemClick} />
 				))}
