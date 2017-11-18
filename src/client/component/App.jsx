@@ -16,6 +16,15 @@ export default class App extends Component {
 
 		this.selectFilter = this.selectFilter.bind(this);
 		this.selectTrap = this.selectTrap.bind(this);
+		this.reset = this.reset.bind(this);
+	}
+
+	reset () {
+		FilterLoader.clearCache();
+		TrapLoader.clearCache();
+
+		this.selectFilter(FilterLoader.getNames()[0]);
+		this.selectTrap(undefined);
 	}
 
 	selectFilter (name) {
@@ -25,8 +34,15 @@ export default class App extends Component {
 	}
 
 	selectTrap (name) {
-		const evaluations = {};
+		if (name === undefined) {
+			this.setState({
+				activeTrap: undefined,
+				evaluations: {}
+			});
+			return;
+		}
 
+		const evaluations = {};
 		FilterLoader.getNames().forEach((filter) => {
 			evaluations[filter] = FilterLoader.get(filter).evaluate(TrapLoader.get(name));
 		});
@@ -44,8 +60,17 @@ export default class App extends Component {
 
 		return (
 			<span>
-				<FilterMenu filter={activeFilter} trap={activeTrap} evaluations={evaluations} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
-				<FilterContent filter={activeFilter} evaluation={evaluations[activeFilter]} />
+				<FilterMenu
+					filter={activeFilter}
+					trap={activeTrap}
+					evaluations={evaluations}
+					onFilterSelected={this.selectFilter}
+					onTrapSelected={this.selectTrap}
+					onReset={this.reset} />
+
+				<FilterContent
+					filter={activeFilter}
+					evaluation={evaluations[activeFilter]} />
 			</span>
 		);
 	}

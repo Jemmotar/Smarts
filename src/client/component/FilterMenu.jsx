@@ -11,14 +11,7 @@ export default class FilterMenu extends Component {
 		this.handleItemClick = (e, { name }) => this.props.onFilterSelected(name);
 		this.handleTrapSelection = (e, { value }) => this.props.onTrapSelected(value);
 		this.handleDebugClick = (e) => remote.getCurrentWindow().toggleDevTools();
-
-		this.handleReloadClick = () => {
-			FilterLoader.clearCache();
-			TrapLoader.clearCache();
-
-			this.props.onFilterSelected(FilterLoader.getNames()[0]);
-			this.props.onTrapSelected(TrapLoader.getNames()[0]);
-		};
+		this.handleReloadClick = () => this.props.onReset();
 	}
 
 	getLabelColor (evaluation) {
