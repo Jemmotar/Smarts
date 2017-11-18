@@ -34,11 +34,11 @@ export default class FilterContent extends Component {
 		return (
 			<Grid columns={2} stretched style={{height: 'calc(100% - 73px)'}}>
 				<Grid.Row>
-					<Grid.Column style={{width: '240px'}}>
+					<Grid.Column style={{width: '300px'}}>
 						<StageMenu filter={filter} activeStageIndex={activeStageIndex} evaluation={evaluation} onStageSelection={this.selectStage} />
 					</Grid.Column>
 
-					<Grid.Column style={{width: 'calc(100% - 270px)'}}>
+					<Grid.Column style={{width: 'calc(100% - 330px)', paddingBottom: '16px', overflowY: 'auto'}}>
 						<StageContent filter={filter} activeStageIndex={activeStageIndex} evaluation={evaluation} />
 					</Grid.Column>
 				</Grid.Row>

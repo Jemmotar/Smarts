@@ -1,5 +1,6 @@
+import { remote } from 'electron';
 import React, { Component } from 'react';
-import { Menu, Label, Select } from 'semantic-ui-react';
+import { Menu, Label, Select, Button, Icon } from 'semantic-ui-react';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
 
@@ -9,6 +10,15 @@ export default class FilterMenu extends Component {
 
 		this.handleItemClick = (e, { name }) => this.props.onFilterSelected(name);
 		this.handleTrapSelection = (e, { value }) => this.props.onTrapSelected(value);
+		this.handleDebugClick = (e) => remote.getCurrentWindow().toggleDevTools();
+
+		this.handleReloadClick = () => {
+			FilterLoader.clearCache();
+			TrapLoader.clearCache();
+
+			this.props.onFilterSelected(FilterLoader.getNames()[0]);
+			this.props.onTrapSelected(TrapLoader.getNames()[0]);
+		};
 	}
 
 	getLabelColor (evaluation) {
@@ -26,6 +36,7 @@ export default class FilterMenu extends Component {
 	render () {
 		const { evaluations } = this.props;
 		const activeFilter = this.props.filter;
+		const activeTrap = this.props.trap;
 
 		const traps = TrapLoader.getNames().map((trap) => {
 			return {
@@ -46,7 +57,21 @@ export default class FilterMenu extends Component {
 
 				<Menu.Menu position="right">
 					<Menu.Item>
-						<Select placeholder="Vyber trapku" options={traps} onChange={this.handleTrapSelection} />
+						<Button animated="vertical" style={{marginRight: '4px'}} onClick={this.handleDebugClick}>
+							<Button.Content hidden>Dev</Button.Content>
+							<Button.Content visible>
+								<Icon name="flask" />
+							</Button.Content>
+						</Button>
+
+						<Button animated="vertical" style={{marginRight: '4px'}} onClick={this.handleReloadClick}>
+							<Button.Content hidden>Reload</Button.Content>
+							<Button.Content visible>
+								<Icon name="refresh" />
+							</Button.Content>
+						</Button>
+
+						<Select placeholder="Vyber trapku" options={traps} value={activeTrap} onChange={this.handleTrapSelection} />
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>

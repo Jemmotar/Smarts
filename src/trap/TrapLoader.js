@@ -3,8 +3,8 @@ import path from 'path';
 
 const TrapLoader = new function () {
 	/* Private varaibles */
-	const cache = {};
 	const trapDir = path.join(__dirname, '/../../traps');
+	let cache = {};
 
 	/* Private functions */
 	function read (location) {
@@ -31,6 +31,10 @@ const TrapLoader = new function () {
 		}
 
 		return cache.files;
+	};
+
+	this.clearCache = function () {
+		cache = {};
 	};
 }();
 

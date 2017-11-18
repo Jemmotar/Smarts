@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Message } from 'semantic-ui-react';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 
 export default class StageContent extends Component {
@@ -7,8 +7,6 @@ export default class StageContent extends Component {
 		if (!evaluation || !evaluation.results[stage.target] || evaluation.results[stage.target].conditions[conditionIndex] === undefined) {
 			return undefined;
 		}
-
-		console.log(evaluation.results[stage.target].conditions[conditionIndex]);
 
 		return evaluation.results[stage.target].conditions[conditionIndex] ? 'green' : 'red';
 	}
@@ -19,6 +17,9 @@ export default class StageContent extends Component {
 
 		return (
 			<div>
+				{evaluation && evaluation.results[stage.target] && evaluation.results[stage.target].errors.length > 0 &&
+					<Message warning header="Evaluation Error" list={evaluation.results[stage.target].errors} />
+				}
 				{stage.conditions.map((condition, conditionIndex) => (
 					<Segment.Group key={conditionIndex}>
 						<Segment>

@@ -15,8 +15,8 @@ const Stage = function (target, conditions, mode) {
 
 		// Check if target trap value is valid
 		if (targetValue === undefined) {
-			evaluation.addError(`Error while trying to evaluate trap with attribute ${this.target}, the attribute is missing!`);
-			evaluation.getCurrentStage().addConditionResult('error');
+			evaluation.addError(`Error while trying to evaluate ${this.target} stage, trap is missing this attribute!`);
+			// evaluation.getCurrentStage().addConditionResult('error');
 			return;
 		}
 
@@ -45,7 +45,7 @@ const Stage = function (target, conditions, mode) {
 				);
 
 			default:
-				evaluation.addError(`Error while trying to evaluate mode with type ${mode}, the mode definition is missing!`);
+				evaluation.addError(`Error while trying to evaluate Stage mode with type ${mode}, the mode definition is missing!`);
 				return null;
 		}
 	}

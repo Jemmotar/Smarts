@@ -40,11 +40,11 @@ export default class App extends Component {
 	}
 
 	render () {
-		const { activeFilter, evaluations } = this.state;
+		const { activeFilter, activeTrap, evaluations } = this.state;
 
 		return (
 			<span>
-				<FilterMenu filter={activeFilter} evaluations={evaluations} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
+				<FilterMenu filter={activeFilter} trap={activeTrap} evaluations={evaluations} onFilterSelected={this.selectFilter} onTrapSelected={this.selectTrap} />
 				<FilterContent filter={activeFilter} evaluation={evaluations[activeFilter]} />
 			</span>
 		);

@@ -6,7 +6,7 @@ import Stage from './Stage';
 const FilterLoader = new function () {
 	/* Private varaibles */
 	const filterDir = path.join(__dirname, '/../../filters');
-	const cache = {};
+	let cache = {};
 
 	/* Private functions */
 	function read (location) {
@@ -44,6 +44,10 @@ const FilterLoader = new function () {
 		}
 
 		return cache.files;
+	};
+
+	this.clearCache = function () {
+		cache = {};
 	};
 }();
 

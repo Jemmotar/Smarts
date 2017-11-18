@@ -25,12 +25,17 @@ export default class StageMenu extends Component {
 		const { filter, activeStageIndex, evaluation } = this.props;
 
 		return (
-			<Menu pointing secondary vertical>
+			<Menu pointing secondary vertical style={{width: '100%'}}>
 				{filter && FilterLoader.get(filter).stages.map((stage, index) => (
 					<Menu.Item key={index} data-index={index} active={activeStageIndex === index} name={stage.target} onClick={this.handleStageSelection}>
 						{stage.target}
-						<Label size="mini">{stage.conditions.length}</Label>
 						<Label circular empty color={this.getLabelColor(evaluation, stage)} />
+						<Label size="mini" color="blue" style={{width: '32px'}}>
+							{stage.mode.toUpperCase()}
+						</Label>
+						<Label size="mini">
+							{stage.conditions.length}
+						</Label>
 					</Menu.Item>
 				))}
 			</Menu>

@@ -7,10 +7,9 @@
     "start": "electron ./src/app.js",
     "build-trap": "node ./src/trap/builder.js"
   },
-  "author": "me",
+  "author": "Filipsi, Jemmotar",
   "license": "ISC",
   "dependencies": {
-    "chalk": "^2.3.0",
     "inquirer": "^3.3.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
