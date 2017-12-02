@@ -13,7 +13,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
 	return {
 		selectStage: (e) =>
-			dispatch(selectStage(parseInt(e.target.attributes['data-index'].value)))
+			dispatch(selectStage(parseInt(e.currentTarget.attributes['data-index'].value)))
 	};
 }
 
