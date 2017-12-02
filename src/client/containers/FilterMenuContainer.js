@@ -14,8 +14,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
 	return {
-		selectFilter: (e, { name }) =>
-			dispatch(selectFilter(name)),
+		selectFilter: (e) =>
+			dispatch(selectFilter(e.currentTarget.attributes['data-id'].value)),
 
 		selectTrap: (e, { value }) =>
 			dispatch(selectTrap(value))

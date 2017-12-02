@@ -1,24 +1,24 @@
 export const FILTER_SELECT = 'FILTER_SELECT';
-export function selectFilter (name) {
+export function selectFilter (id) {
 	return {
 		type: FILTER_SELECT,
-		name
+		id
 	};
 }
 
-export const FILTER_ADD = 'FILTER_ADD';
-export function addFilter (filename) {
+export const FILTER_CHANGED = 'FILTER_CHANGED';
+export function notifyFilterChange (id) {
 	return {
-		type: FILTER_ADD,
-		filename
+		type: FILTER_CHANGED,
+		id
 	};
 }
 
 export const FILTER_REMOVE = 'FILTER_REMOVE';
-export function removeFilter (filename) {
+export function removeFilter (id) {
 	return {
 		type: FILTER_REMOVE,
-		filename
+		id
 	};
 }
 

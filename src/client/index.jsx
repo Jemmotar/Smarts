@@ -6,7 +6,7 @@ import watch from 'node-watch';
 
 import path from 'path';
 import FilterLoader from '~/src/filter/FilterLoader.js';
-import { addFilter, removeFilter } from './actions';
+import { notifyFilterChange, selectTrap, selectFilter, removeFilter } from './actions';
 
 import reducers from './reducers';
 import App from './components/App.jsx';
@@ -14,14 +14,18 @@ import App from './components/App.jsx';
 const store = createStore(reducers);
 
 watch(FilterLoader.source, { filter: /\.json$/ }, (e, filename) => {
+	// Get only base filename
+	filename = path.basename(filename, '.json');
+	// Perform acction depending on event type
 	switch (e) {
 		case 'update':
-			store.dispatch(addFilter(path.basename(filename, '.json')));
+			store.dispatch(notifyFilterChange(filename));
+			store.dispatch(selectFilter(store.getState().app.filter.activeFilter.id));
+			store.dispatch(selectTrap(null));
 			return;
 
 		case 'remove':
-			store.dispatch(removeFilter(path.basename(filename, '.json')));
-			return;
+			store.dispatch(removeFilter(filename));
 	}
 });
 

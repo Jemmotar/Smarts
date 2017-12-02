@@ -1,6 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, FILTER_ADD, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT } from './../actions';
+import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT } from './../actions';
 
 const filters = FilterLoader.getAll();
 
@@ -23,7 +23,7 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case FILTER_SELECT:
-			const newFilter = state.filter.list.find((f) => f.name === action.name);
+			const newFilter = state.filter.list.find((f) => f.id === action.id);
 			return {
 				...state,
 				filter: {
@@ -33,19 +33,24 @@ export default (state = initialState, action) => {
 				},
 				evaluation: {
 					...state.evaluation,
-					active: state.evaluation.list.find((e) => e.filter.name === newFilter.name)
+					active: state.evaluation.list.find((e) => e.filter.id === newFilter.id)
 				}
 			};
 
-		case FILTER_ADD:
+		case FILTER_CHANGED:
+			const isInList = state.filter.list.find((f) => f.id === action.id) !== undefined;
 			return {
 				...state,
 				filter: {
 					...state.filter,
-					list: [
-						...state.filter.list,
-						FilterLoader.get(action.filename)
-					]
+					list: isInList
+					? state.filter.list.map((f) => f.id === action.id ? FilterLoader.get(action.id) : f) /* Update */
+					: [ ...state.filter.list, FilterLoader.get(action.id) ] /* Add new */
+				},
+				evaluation: {
+					...state.evaluation,
+					list: [],
+					active: null
 				}
 			};
 
@@ -54,7 +59,7 @@ export default (state = initialState, action) => {
 				...state,
 				filter: {
 					...state.filter,
-					list: state.filter.list.filter((f) => f.id !== action.filename)
+					list: state.filter.list.filter((f) => f.id !== action.id)
 				}
 			};
 
@@ -69,6 +74,7 @@ export default (state = initialState, action) => {
 
 		case TRAP_SELECT:
 			const newTrap = state.trap.list.find((t) => t.id === action.id);
+			if (newTrap === undefined) return state;
 			const evaluations = state.filter.list.map((f) => f.evaluate(newTrap));
 			return {
 				...state,
