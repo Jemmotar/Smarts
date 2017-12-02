@@ -1,7 +1,8 @@
 import EvaluationResult from './EvaluationResult.js';
 
-const Filter = function (name, stages = []) {
+const Filter = function (id, name, stages = []) {
 	/* Public variables */
+	this.id = id;
 	this.name = name;
 	this.stages = stages;
 

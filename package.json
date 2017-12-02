@@ -9,6 +9,7 @@
   "author": "Filipsi, Jemmotar",
   "license": "GPL-3.0",
   "dependencies": {
+    "node-watch": "^0.5.5",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",

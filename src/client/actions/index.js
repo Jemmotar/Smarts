@@ -6,6 +6,22 @@ export function selectFilter (name) {
 	};
 }
 
+export const FILTER_ADD = 'FILTER_ADD';
+export function addFilter (filename) {
+	return {
+		type: FILTER_ADD,
+		filename
+	};
+}
+
+export const FILTER_REMOVE = 'FILTER_REMOVE';
+export function removeFilter (filename) {
+	return {
+		type: FILTER_REMOVE,
+		filename
+	};
+}
+
 export const STAGE_SELECT = 'STAGE_SELECT';
 export function selectStage (id) {
 	return {

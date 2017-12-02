@@ -1,6 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, STAGE_SELECT, TRAP_SELECT } from './../actions';
+import { FILTER_SELECT, FILTER_ADD, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT } from './../actions';
 
 const filters = FilterLoader.getAll();
 
@@ -34,6 +34,27 @@ export default (state = initialState, action) => {
 				evaluation: {
 					...state.evaluation,
 					active: state.evaluation.list.find((e) => e.filter.name === newFilter.name)
+				}
+			};
+
+		case FILTER_ADD:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					list: [
+						...state.filter.list,
+						FilterLoader.get(action.filename)
+					]
+				}
+			};
+
+		case FILTER_REMOVE:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					list: state.filter.list.filter((f) => f.id !== action.filename)
 				}
 			};
 

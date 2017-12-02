@@ -4,8 +4,8 @@ import Filter from './Filter';
 import Stage from './Stage';
 
 const FilterLoader = new function () {
-	/* Private varaibles */
-	const filterDir = path.join(__dirname, '/../../filters');
+	/* Public variables */
+	this.source = path.join(__dirname, '/../../filters');
 
 	/* Private functions */
 	function read (location) {
@@ -14,7 +14,7 @@ const FilterLoader = new function () {
 
 	/* Public functions */
 	this.get = (filterName) => {
-		const location = path.join(filterDir, filterName + '.json');
+		const location = path.join(this.source, filterName + '.json');
 		const filterContent = read(location);
 
 		const stages = filterContent.stages.map(
@@ -22,6 +22,7 @@ const FilterLoader = new function () {
 		);
 
 		const filter = new Filter(
+			filterName,
 			filterContent.name,
 			stages
 		);
@@ -31,7 +32,7 @@ const FilterLoader = new function () {
 
 	this.getFiles = () => {
 		return fs
-			.readdirSync(filterDir)
+			.readdirSync(this.source)
 			.filter((file) => file.includes('.json'))
 			.map((file) => file.replace('.json', ''));
 	};
