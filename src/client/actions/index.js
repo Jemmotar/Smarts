@@ -5,3 +5,11 @@ export function selectFilter (name) {
 		name
 	};
 }
+
+export const STAGE_SELECT = 'STAGE_SELECT';
+export function selectStage (id) {
+	return {
+		type: STAGE_SELECT,
+		id
+	};
+}

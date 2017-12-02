@@ -1,6 +1,7 @@
 // Stage - one step (line) in filter
-const Stage = function (target, conditions, mode) {
+const Stage = function (id, target, conditions, mode) {
 	/* Public variables */
+	this.id = id;
 	this.target = target;
 	this.conditions = conditions;
 	this.mode = mode === undefined ? 'or' : mode;

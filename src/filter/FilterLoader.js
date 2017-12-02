@@ -18,7 +18,7 @@ const FilterLoader = new function () {
 		const filterContent = read(location);
 
 		const stages = filterContent.stages.map(
-			(s) => new Stage(s.target, s.conditions, s.mode)
+			(s, index) => new Stage(index, s.target, s.conditions, s.mode)
 		);
 
 		const filter = new Filter(

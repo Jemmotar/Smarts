@@ -5,7 +5,7 @@ import { selectFilter } from './../actions';
 function mapStateToProps (state) {
 	return {
 		filters: state.app.filter.list,
-		activeFilter: state.app.filter.active
+		activeFilter: state.app.filter.activeFilter
 	};
 }
 

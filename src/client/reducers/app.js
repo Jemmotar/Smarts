@@ -1,21 +1,35 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
-import { FILTER_SELECT } from './../actions';
+import { FILTER_SELECT, STAGE_SELECT } from './../actions';
+
+const filters = FilterLoader.getAll();
 
 const initialState = {
 	filter: {
-		list: FilterLoader.getAll(),
-		active: null
+		list: filters,
+		activeFilter: filters.length > 0 ? filters[0] : null,
+		activeStage: filters.length > 0 ? (filters[0].stages.length > 0 ? filters[0].stages[0] : null) : null
 	}
 };
 
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case FILTER_SELECT:
+			const newFilter = state.filter.list.find((f) => f.name === action.name);
 			return {
 				...state,
 				filter: {
 					...state.filter,
-					active: action.name
+					activeFilter: newFilter,
+					activeStage: newFilter ? (newFilter.stages.length > 0 ? newFilter.stages[0] : null) : null
+				}
+			};
+
+		case STAGE_SELECT:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					activeStage: state.filter.activeFilter.stages.find((s) => s.id === action.id)
 				}
 			};
 
