@@ -4,7 +4,6 @@ import path from 'path';
 const TrapLoader = new function () {
 	/* Private varaibles */
 	const trapDir = path.join(__dirname, '/../../traps');
-	let cache = {};
 
 	/* Private functions */
 	function read (location) {
@@ -12,29 +11,24 @@ const TrapLoader = new function () {
 	}
 
 	/* Public functions */
-	this.get = function (trapName) {
+	this.get = (trapName) => {
 		const location = path.join(trapDir, trapName + '.json');
-
-		if (cache[location] === undefined) {
-			cache[location] = read(location);
-		}
-
-		return cache[location];
+		const trap = read(location);
+		trap.id = trapName;
+		return trap;
 	};
 
-	this.getNames = function () {
-		if (cache.files === undefined) {
-			cache.files = fs
-				.readdirSync(trapDir)
-				.filter((file) => file.includes('.json'))
-				.map((file) => file.replace('.json', ''));
-		}
-
-		return cache.files;
+	this.getFiles = () => {
+		return fs
+			.readdirSync(trapDir)
+			.filter((file) => file.includes('.json'))
+			.map((file) => file.replace('.json', ''));
 	};
 
-	this.clearCache = function () {
-		cache = {};
+	this.getAll = () => {
+		return this.getFiles().map(
+			(fileName) => this.get(fileName)
+		);
 	};
 }();
 

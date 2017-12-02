@@ -1,5 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
-import { FILTER_SELECT, STAGE_SELECT } from './../actions';
+import TrapLoader from '~/src/trap/TrapLoader.js';
+import { FILTER_SELECT, STAGE_SELECT, TRAP_SELECT } from './../actions';
 
 const filters = FilterLoader.getAll();
 
@@ -8,6 +9,10 @@ const initialState = {
 		list: filters,
 		activeFilter: filters.length > 0 ? filters[0] : null,
 		activeStage: filters.length > 0 ? (filters[0].stages.length > 0 ? filters[0].stages[0] : null) : null
+	},
+	trap: {
+		list: TrapLoader.getAll(),
+		active: null
 	}
 };
 
@@ -30,6 +35,15 @@ export default (state = initialState, action) => {
 				filter: {
 					...state.filter,
 					activeStage: state.filter.activeFilter.stages.find((s) => s.id === action.id)
+				}
+			};
+
+		case TRAP_SELECT:
+			return {
+				...state,
+				trap: {
+					...state.trap,
+					active: action.id
 				}
 			};
 

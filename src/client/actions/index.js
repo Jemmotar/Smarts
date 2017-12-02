@@ -13,3 +13,11 @@ export function selectStage (id) {
 		id
 	};
 }
+
+export const TRAP_SELECT = 'TRAP_SELECT';
+export function selectTrap (id) {
+	return {
+		type: TRAP_SELECT,
+		id
+	};
+}
