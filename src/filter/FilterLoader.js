@@ -13,7 +13,7 @@ const FilterLoader = new function () {
 	}
 
 	/* Public functions */
-	this.get = function (filterName) {
+	this.get = (filterName) => {
 		const location = path.join(filterDir, filterName + '.json');
 		const filterContent = read(location);
 
@@ -29,11 +29,17 @@ const FilterLoader = new function () {
 		return filter;
 	};
 
-	this.getFiles = function () {
+	this.getFiles = () => {
 		return fs
 			.readdirSync(filterDir)
 			.filter((file) => file.includes('.json'))
 			.map((file) => file.replace('.json', ''));
+	};
+
+	this.getAll = () => {
+		return this.getFiles().map(
+			(fileName) => this.get(fileName)
+		);
 	};
 }();
 

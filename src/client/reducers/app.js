@@ -3,7 +3,7 @@ import { FILTER_SELECT } from './../actions';
 
 const initialState = {
 	filter: {
-		list: FilterLoader.getFiles(),
+		list: FilterLoader.getAll(),
 		active: null
 	}
 };
