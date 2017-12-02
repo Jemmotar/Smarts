@@ -13,6 +13,10 @@ const initialState = {
 	trap: {
 		list: TrapLoader.getAll(),
 		active: null
+	},
+	evaluation: {
+		list: [],
+		active: null
 	}
 };
 
@@ -26,6 +30,10 @@ export default (state = initialState, action) => {
 					...state.filter,
 					activeFilter: newFilter,
 					activeStage: newFilter ? (newFilter.stages.length > 0 ? newFilter.stages[0] : null) : null
+				},
+				evaluation: {
+					...state.evaluation,
+					active: state.evaluation.list.find((e) => e.filter.name === newFilter.name)
 				}
 			};
 
@@ -39,11 +47,18 @@ export default (state = initialState, action) => {
 			};
 
 		case TRAP_SELECT:
+			const newTrap = state.trap.list.find((t) => t.id === action.id);
+			const evaluations = state.filter.list.map((f) => f.evaluate(newTrap));
 			return {
 				...state,
 				trap: {
 					...state.trap,
-					active: action.id
+					active: newTrap
+				},
+				evaluation: {
+					...state.evaluation,
+					list: evaluations,
+					active: evaluations.find((e) => e.filter.name === state.filter.activeFilter.name)
 				}
 			};
 

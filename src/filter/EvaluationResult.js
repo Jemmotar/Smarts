@@ -15,12 +15,14 @@ const EvaluationResult = function (filter, trap) {
 	};
 
 	this.endStage = () => {
-		this.results[current.stage.target] = current;
+		this.results[current.stage.id] = current;
 	};
 
-	this.getCurrentStage = () => {
-		return current;
-	};
+	this.getCurrentStage = () =>
+		current;
+
+	this.getStageResult = (id) =>
+		this.results[id];
 
 	this.addError = (text) => {
 		// Add error to global pool

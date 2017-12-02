@@ -5,7 +5,8 @@ import { selectStage } from './../actions';
 function mapStateToProps (state) {
 	return {
 		activeFilter: state.app.filter.activeFilter,
-		activeStage: state.app.filter.activeStage
+		activeStage: state.app.filter.activeStage,
+		evaluation: state.app.evaluation.active
 	};
 }
 

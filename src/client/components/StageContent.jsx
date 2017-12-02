@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Message } from 'semantic-ui-react';
 
 export default class StageContent extends Component {
+	getSegmentColor (conditionIndex) {
+		const { evaluation, stage } = this.props;
+
+		if (!evaluation || !evaluation.getStageResult(stage.id) || evaluation.getStageResult(stage.id).conditions[conditionIndex] === undefined) {
+			return undefined;
+		}
+
+		return evaluation.getStageResult(stage.id).conditions[conditionIndex] ? 'green' : 'red';
+	}
+
 	render () {
+		const { evaluation, stage } = this.props;
+
 		return (
 			<div>
-				{this.props.stage.conditions.map((condition, conditionIndex) => (
+				{evaluation && evaluation.getStageResult(stage.id) && evaluation.getStageResult(stage.id).errors.length > 0 &&
+					<Message warning header="Evaluation Error" list={evaluation.getStageResult(stage.id).errors} />
+				}
+				{stage.conditions.map((condition, conditionIndex) => (
 					<Segment.Group key={conditionIndex}>
 						<Segment>
 							{condition.value}
 						</Segment>
-						<Segment secondary color={undefined}>
+						<Segment secondary color={this.getSegmentColor(conditionIndex)}>
 							{condition.logic}
 						</Segment>
 					</Segment.Group>

@@ -3,7 +3,8 @@ import StageContent from './../components/StageContent.jsx';
 
 function mapStateToProps (state) {
 	return {
-		stage: state.app.filter.activeStage
+		stage: state.app.filter.activeStage,
+		evaluation: state.app.evaluation.active
 	};
 }
 

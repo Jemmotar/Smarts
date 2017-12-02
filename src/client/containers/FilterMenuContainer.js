@@ -7,7 +7,8 @@ function mapStateToProps (state) {
 		filters: state.app.filter.list,
 		activeFilter: state.app.filter.activeFilter,
 		traps: state.app.trap.list,
-		activeTrap: state.app.trap.active
+		activeTrap: state.app.trap.active,
+		evaluations: state.app.evaluation.list
 	};
 }
 
@@ -16,8 +17,8 @@ function mapDispatchToProps (dispatch) {
 		selectFilter: (e, { name }) =>
 			dispatch(selectFilter(name)),
 
-		selectTrap: (e, { id }) =>
-			dispatch(selectTrap(id))
+		selectTrap: (e, { value }) =>
+			dispatch(selectTrap(value))
 	};
 }
 

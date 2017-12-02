@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import { Menu, Label, Select } from 'semantic-ui-react';
 
 export default class FilterMenu extends Component {
+	getLabelColor (evaluation) {
+		if (!evaluation) {
+			return 'grey';
+		}
+
+		if (evaluation.errors.length > 0) {
+			return 'yellow';
+		}
+
+		return evaluation.passed ? 'green' : 'red';
+	}
+
 	render () {
 		const traps = this.props.traps.map((trap) => {
 			return {
@@ -16,13 +28,13 @@ export default class FilterMenu extends Component {
 				{this.props.filters.map((filter, index) => (
 					<Menu.Item name={filter.name} key={index} active={this.props.activeFilter.name === filter.name} onClick={this.props.selectFilter}>
 						{filter.name}
-						<Label circular empty color="grey" />
+						<Label circular empty color={this.getLabelColor(this.props.evaluations.find((e) => e.filter.name === filter.name))} />
 					</Menu.Item>
 				))}
 
 				<Menu.Menu position="right">
 					<Menu.Item>
-						<Select placeholder="Vyber trapku" options={traps} value={this.props.activeTrap} onChange={this.props.selectTrap} />
+						<Select placeholder="Vyber trapku" options={traps} value={this.props.activeTrap ? this.props.activeTrap.id : null} onChange={this.props.selectTrap} />
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>
