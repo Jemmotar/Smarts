@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import StageMenu from './../containers/StageMenuContainer.js';
+import StageContent from './../containers/StageContentContainer.js';
 
 export default class FilterContent extends Component {
 	render () {
@@ -12,7 +13,7 @@ export default class FilterContent extends Component {
 					</Grid.Column>
 
 					<Grid.Column style={{width: 'calc(100% - 330px)', paddingBottom: '16px', overflowY: 'auto'}}>
-
+						<StageContent />
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>
