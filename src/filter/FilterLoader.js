@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import parseJson from 'parse-json';
 import Filter from './Filter';
 import Stage from './Stage';
 
@@ -9,7 +10,7 @@ const FilterLoader = new function () {
 
 	/* Private functions */
 	function read (location) {
-		return JSON.parse(fs.readFileSync(location).toString());
+		return parseJson(fs.readFileSync(location).toString(), path.basename(location));
 	}
 
 	/* Public functions */
@@ -35,12 +36,6 @@ const FilterLoader = new function () {
 			.readdirSync(this.source)
 			.filter((file) => file.includes('.json'))
 			.map((file) => file.replace('.json', ''));
-	};
-
-	this.getAll = () => {
-		return this.getFiles().map(
-			(fileName) => this.get(fileName)
-		);
 	};
 }();
 

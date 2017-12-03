@@ -37,3 +37,26 @@ export function selectTrap (id) {
 		id
 	};
 }
+
+export const ERROR_ADD = 'ERROR_ADD';
+export function addError (text) {
+	return {
+		type: ERROR_ADD,
+		text
+	};
+}
+
+export const ERROR_REMOVE = 'ERROR_REMOVE';
+export function removeError (id) {
+	return {
+		type: ERROR_REMOVE,
+		id
+	};
+}
+
+export const ERROR_CLEAR = 'ERROR_CLEAR';
+export function clearErrors () {
+	return {
+		type: ERROR_CLEAR
+	};
+}

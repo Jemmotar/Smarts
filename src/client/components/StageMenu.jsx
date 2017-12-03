@@ -19,7 +19,7 @@ export default class StageMenu extends Component {
 	render () {
 		return (
 			<Menu pointing secondary vertical style={{width: '100%'}}>
-				{this.props.activeFilter.stages.map((stage, index) => (
+				{this.props.activeFilter && this.props.activeFilter.stages.map((stage, index) => (
 					<Menu.Item key={index} data-index={index} active={this.props.activeStage.id === index} name={stage.target} onClick={this.props.selectStage}>
 						{stage.target}
 						<Label circular empty color={this.getLabelColor(stage)} />

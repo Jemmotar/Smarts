@@ -26,7 +26,7 @@ export default class FilterMenu extends Component {
 		return (
 			<Menu tabular>
 				{this.props.filters.map((filter, index) => (
-					<Menu.Item name={filter.name} key={index} data-id={filter.id} active={this.props.activeFilter.id === filter.id} onClick={this.props.selectFilter}>
+					<Menu.Item name={filter.name} key={index} data-id={filter.id} active={this.props.activeFilter && this.props.activeFilter.id === filter.id} onClick={this.props.selectFilter}>
 						{filter.name}
 						<Label circular empty color={this.getLabelColor(this.props.evaluations.find((e) => e.filter.name === filter.name))} />
 					</Menu.Item>

@@ -20,7 +20,7 @@ export default class StageContent extends Component {
 				{evaluation && evaluation.getStageResult(stage.id) && evaluation.getStageResult(stage.id).errors.length > 0 &&
 					<Message warning header="Evaluation Error" list={evaluation.getStageResult(stage.id).errors} />
 				}
-				{stage.conditions.map((condition, conditionIndex) => (
+				{stage && stage.conditions.map((condition, conditionIndex) => (
 					<Segment.Group key={conditionIndex}>
 						<Segment>
 							{condition.value}

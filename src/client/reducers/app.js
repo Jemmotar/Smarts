@@ -1,14 +1,12 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT } from './../actions';
-
-const filters = FilterLoader.getAll();
+import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
 	filter: {
-		list: filters,
-		activeFilter: filters.length > 0 ? filters[0] : null,
-		activeStage: filters.length > 0 ? (filters[0].stages.length > 0 ? filters[0].stages[0] : null) : null
+		list: [],
+		activeFilter: null,
+		activeStage: null
 	},
 	trap: {
 		list: TrapLoader.getAll(),
@@ -17,6 +15,9 @@ const initialState = {
 	evaluation: {
 		list: [],
 		active: null
+	},
+	error: {
+		list: []
 	}
 };
 
@@ -38,14 +39,19 @@ export default (state = initialState, action) => {
 			};
 
 		case FILTER_CHANGED:
+			const loadedFilter = FilterLoader.get(action.id);
+			if (!loadedFilter) return state;
 			const isInList = state.filter.list.find((f) => f.id === action.id) !== undefined;
+			const hasStage = loadedFilter.stages && loadedFilter.stages.length > 0;
 			return {
 				...state,
 				filter: {
 					...state.filter,
 					list: isInList
-					? state.filter.list.map((f) => f.id === action.id ? FilterLoader.get(action.id) : f) /* Update */
-					: [ ...state.filter.list, FilterLoader.get(action.id) ] /* Add new */
+					? state.filter.list.map((f) => f.id === action.id ? loadedFilter : f) /* Update */
+					: [ ...state.filter.list, loadedFilter ] /* Add new */,
+					activeFilter: state.filter.activeFilter ? state.filter.activeFilter : loadedFilter, /* If nothing is selected, select first filter */
+					activeStage: state.filter.activeStage ? state.filter.activeStage : (hasStage ? loadedFilter.stages[0] : null)  /* If nothing is selected, select first stage in first filter */
 				},
 				evaluation: {
 					...state.evaluation,
@@ -74,7 +80,7 @@ export default (state = initialState, action) => {
 
 		case TRAP_SELECT:
 			const newTrap = state.trap.list.find((t) => t.id === action.id);
-			if (newTrap === undefined) return state;
+			if (!newTrap) return state;
 			const evaluations = state.filter.list.map((f) => f.evaluate(newTrap));
 			return {
 				...state,
@@ -86,6 +92,36 @@ export default (state = initialState, action) => {
 					...state.evaluation,
 					list: evaluations,
 					active: evaluations.find((e) => e.filter.name === state.filter.activeFilter.name)
+				}
+			};
+
+		case ERROR_ADD:
+			return {
+				...state,
+				error: {
+					...state.error,
+					list: [
+						...state.error.list,
+						action.text
+					]
+				}
+			};
+
+		case ERROR_REMOVE:
+			return {
+				...state,
+				error: {
+					...state.error,
+					list: state.error.list.filter((e, index) => index !== action.id)
+				}
+			};
+
+		case ERROR_CLEAR:
+			return {
+				...state,
+				error: {
+					...state.error,
+					list: []
 				}
 			};
 
