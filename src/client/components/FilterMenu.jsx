@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Label, Select } from 'semantic-ui-react';
+import { Menu, Label, Checkbox } from 'semantic-ui-react';
 
 export default class FilterMenu extends Component {
 	getLabelColor (evaluation) {
@@ -15,14 +15,6 @@ export default class FilterMenu extends Component {
 	}
 
 	render () {
-		const traps = this.props.traps.map((trap) => {
-			return {
-				key: trap.id,
-				value: trap.id,
-				text: trap.id
-			};
-		});
-
 		return (
 			<Menu tabular>
 				{this.props.filters.map((filter, index) => (
@@ -34,7 +26,7 @@ export default class FilterMenu extends Component {
 
 				<Menu.Menu position="right">
 					<Menu.Item>
-						<Select placeholder="Vyber trapku" options={traps} value={this.props.activeTrap ? this.props.activeTrap.id : null} onChange={this.props.selectTrap} />
+						<Checkbox toggle onChange={this.props.toggleSidebar} />
 					</Menu.Item>
 				</Menu.Menu>
 			</Menu>

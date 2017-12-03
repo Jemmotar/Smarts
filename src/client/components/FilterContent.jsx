@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import StageMenu from './../containers/StageMenuContainer.js';
 import StageContent from './../containers/StageContentContainer.js';
+import TrapSidePanelContainer from './../containers/TrapSidePanelContainer.js';
 
 export default class FilterContent extends Component {
 	render () {
@@ -12,8 +13,9 @@ export default class FilterContent extends Component {
 						<StageMenu />
 					</Grid.Column>
 
-					<Grid.Column style={{width: 'calc(100% - 330px)', paddingBottom: '16px', overflowY: 'auto'}}>
+					<Grid.Column style={{width: 'calc(100% - 330px)', paddingBottom: '16px', display: 'flex !important', flexDirection: 'row'}}>
 						<StageContent />
+						<TrapSidePanelContainer />
 					</Grid.Column>
 				</Grid.Row>
 			</Grid>

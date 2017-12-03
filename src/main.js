@@ -20,7 +20,7 @@ function createWindow () {
 	// Remove default navigation menu
 	win.setMenu(null);
 
-	// win.openDevTools();
+	win.openDevTools({ mode: 'detach' });
 
 	// Emitted when the window is closed.
 	win.on('closed', () => {

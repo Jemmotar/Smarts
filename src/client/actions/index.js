@@ -54,6 +54,14 @@ export function removeTrap (id) {
 	};
 }
 
+export const TRAP_SIDEBAR_TOGGLE = 'TRAP_SIDEBAR_TOGGLE';
+export function toggleTrapSidebar (show) {
+	return {
+		type: TRAP_SIDEBAR_TOGGLE,
+		show
+	};
+}
+
 export const ERROR_ADD = 'ERROR_ADD';
 export function addError (text) {
 	return {

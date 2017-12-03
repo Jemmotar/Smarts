@@ -16,10 +16,11 @@ export default class StageContent extends Component {
 		const { evaluation, stage } = this.props;
 
 		return (
-			<div>
+			<div style={{ flex: '1', overflowY: 'auto', paddingRight: '28px' }}>
 				{evaluation && evaluation.getStageResult(stage.id) && evaluation.getStageResult(stage.id).errors.length > 0 &&
-					<Message warning header="Evaluation Error" list={evaluation.getStageResult(stage.id).errors} />
+					<Message warning header="Evaluation failure" list={evaluation.getStageResult(stage.id).errors} />
 				}
+
 				{stage && stage.conditions.map((condition, conditionIndex) => (
 					<Segment.Group key={conditionIndex}>
 						<Segment>

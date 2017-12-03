@@ -1,6 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_CHANGED, TRAP_REMOVE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
+import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_CHANGED, TRAP_REMOVE, TRAP_SIDEBAR_TOGGLE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
 	filter: {
@@ -10,7 +10,8 @@ const initialState = {
 	},
 	trap: {
 		list: [],
-		active: null
+		active: null,
+		isSidebarOpen: false
 	},
 	evaluation: {
 		list: [],
@@ -48,8 +49,8 @@ export default (state = initialState, action) => {
 				filter: {
 					...state.filter,
 					list: isInList
-					? state.filter.list.map((f) => f.id === action.id ? loadedFilter : f) /* Update */
-					: [ ...state.filter.list, loadedFilter ] /* Add new */,
+						? state.filter.list.map((f) => f.id === action.id ? loadedFilter : f) /* Update */
+						: [ ...state.filter.list, loadedFilter ] /* Add new */,
 					activeFilter: state.filter.activeFilter ? state.filter.activeFilter : loadedFilter, /* If nothing is selected, select first filter */
 					activeStage: state.filter.activeStage ? state.filter.activeStage : (hasStage ? loadedFilter.stages[0] : null)  /* If nothing is selected, select first stage in first filter */
 				},
@@ -104,8 +105,8 @@ export default (state = initialState, action) => {
 				trap: {
 					...state.trap,
 					list: isTrapInList
-					? state.trap.list.map((t) => t.id === action.id ? loadedTrap : t) /* Update */
-					: [ ...state.trap.list, loadedTrap ] /* Add new */
+						? state.trap.list.map((t) => t.id === action.id ? loadedTrap : t) /* Update */
+						: [ ...state.trap.list, loadedTrap ] /* Add new */
 				}
 			};
 
@@ -122,6 +123,18 @@ export default (state = initialState, action) => {
 					...state.evaluation,
 					list: isTrapActive ? [] : state.evaluation.list,
 					active: isTrapActive ? null : state.evaluation.active
+				}
+			};
+
+		case TRAP_SIDEBAR_TOGGLE:
+			console.log(state.trap.isSidebarOpen);
+			return {
+				...state,
+				trap: {
+					...state.trap,
+					isSidebarOpen: action.show === undefined
+						? !state.trap.isSidebarOpen
+						: action.show
 				}
 			};
 
