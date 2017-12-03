@@ -1,18 +1,19 @@
 import fs from 'fs';
 import path from 'path';
+import parseJson from 'parse-json';
 
 const TrapLoader = new function () {
-	/* Private varaibles */
-	const trapDir = path.join(__dirname, '/../../traps');
+	/* Public varaibles */
+	this.source = path.join(__dirname, '/../../traps');
 
 	/* Private functions */
 	function read (location) {
-		return JSON.parse(fs.readFileSync(location).toString());
+		return parseJson(fs.readFileSync(location).toString(), path.basename(location));
 	}
 
 	/* Public functions */
 	this.get = (trapName) => {
-		const location = path.join(trapDir, trapName + '.json');
+		const location = path.join(this.source, trapName + '.json');
 		const trap = read(location);
 		trap.id = trapName;
 		return trap;
@@ -20,7 +21,7 @@ const TrapLoader = new function () {
 
 	this.getFiles = () => {
 		return fs
-			.readdirSync(trapDir)
+			.readdirSync(this.source)
 			.filter((file) => file.includes('.json'))
 			.map((file) => file.replace('.json', ''));
 	};

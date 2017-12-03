@@ -1,6 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
+import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_CHANGED, TRAP_REMOVE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
 	filter: {
@@ -9,7 +9,7 @@ const initialState = {
 		activeStage: null
 	},
 	trap: {
-		list: TrapLoader.getAll(),
+		list: [],
 		active: null
 	},
 	evaluation: {
@@ -92,6 +92,36 @@ export default (state = initialState, action) => {
 					...state.evaluation,
 					list: evaluations,
 					active: evaluations.find((e) => e.filter.name === state.filter.activeFilter.name)
+				}
+			};
+
+		case TRAP_CHANGED:
+			const loadedTrap = TrapLoader.get(action.id);
+			if (!loadedTrap) return state;
+			const isTrapInList = state.trap.list.find((t) => t.id === action.id) !== undefined;
+			return {
+				...state,
+				trap: {
+					...state.trap,
+					list: isTrapInList
+					? state.trap.list.map((t) => t.id === action.id ? loadedTrap : t) /* Update */
+					: [ ...state.trap.list, loadedTrap ] /* Add new */
+				}
+			};
+
+		case TRAP_REMOVE:
+			const isTrapActive = state.trap.active && state.trap.active.id === action.id;
+			return {
+				...state,
+				trap: {
+					...state.trap,
+					list: state.trap.list.filter((t) => t.id !== action.id),
+					active: isTrapActive ? null : state.trap.active
+				},
+				evaluation: {
+					...state.evaluation,
+					list: isTrapActive ? [] : state.evaluation.list,
+					active: isTrapActive ? null : state.evaluation.active
 				}
 			};
 

@@ -38,6 +38,22 @@ export function selectTrap (id) {
 	};
 }
 
+export const TRAP_CHANGED = 'TRAP_CHANGED';
+export function notifyTrapChange (id) {
+	return {
+		type: TRAP_CHANGED,
+		id
+	};
+}
+
+export const TRAP_REMOVE = 'TRAP_REMOVE';
+export function removeTrap (id) {
+	return {
+		type: TRAP_REMOVE,
+		id
+	};
+}
+
 export const ERROR_ADD = 'ERROR_ADD';
 export function addError (text) {
 	return {

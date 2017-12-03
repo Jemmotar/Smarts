@@ -7,7 +7,8 @@ import watch from 'node-watch';
 
 import path from 'path';
 import FilterLoader from '~/src/filter/FilterLoader.js';
-import { notifyFilterChange, selectTrap, selectFilter, removeFilter, addError, clearErrors } from './actions';
+import TrapLoader from '~/src/trap/TrapLoader.js';
+import { notifyFilterChange, notifyTrapChange, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
 
 import reducers from './reducers';
 import App from './components/App.jsx';
@@ -41,9 +42,31 @@ watch(FilterLoader.source, { filter: /\.json$/ }, (e, filename) => {
 	}
 });
 
+// Watch for changes in trap folder
+watch(TrapLoader.source, { filter: /\.json$/ }, (e, filename) => {
+	// Get only base filename
+	filename = path.basename(filename, '.json');
+	// Perform acction depending on event type
+	switch (e) {
+		case 'update':
+			store.dispatch(clearErrors());
+			store.dispatch(notifyTrapChange(filename));
+			store.dispatch(selectTrap(filename));
+			return;
+
+		case 'remove':
+			store.dispatch(removeTrap(filename));
+	}
+});
+
 // Load all filters
 for (const filename of FilterLoader.getFiles()) {
 	store.dispatch(notifyFilterChange(filename));
+}
+
+// Load all traps
+for (const filename of TrapLoader.getFiles()) {
+	store.dispatch(notifyTrapChange(filename));
 }
 
 // Render DOM
