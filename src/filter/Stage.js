@@ -83,8 +83,16 @@ const Stage = function (id, target, conditions, mode) {
 				result = targetValue.startsWith(condition.value);
 				break;
 
+			case 'not-starts-with':
+				result = !targetValue.startsWith(condition.value);
+				break;
+
 			case 'ends-with':
 				result = targetValue.endsWith(condition.value);
+				break;
+
+			case 'not-ends-with':
+				result = !targetValue.endsWith(condition.value);
 				break;
 
 			case 'regexp-match':
