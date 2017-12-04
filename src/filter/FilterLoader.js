@@ -6,7 +6,7 @@ import Stage from './Stage';
 
 const FilterLoader = new function () {
 	/* Public variables */
-	this.source = path.join(__dirname, '/../../filters');
+	this.source = path.join(__dirname, '/../../data/filters');
 
 	/* Private functions */
 	function read (location) {

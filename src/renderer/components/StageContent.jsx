@@ -16,7 +16,7 @@ export default class StageContent extends Component {
 		const { evaluation, stage } = this.props;
 
 		return (
-			<div style={{ flex: '1', overflowY: 'auto', paddingRight: '28px' }}>
+			<div style={{ flex: '1', overflowY: 'auto', paddingRight: '28px', paddingBottom: '16px' }}>
 				{evaluation && evaluation.getStageResult(stage.id) && evaluation.getStageResult(stage.id).errors.length > 0 &&
 					<Message warning header="Evaluation failure" list={evaluation.getStageResult(stage.id).errors} />
 				}

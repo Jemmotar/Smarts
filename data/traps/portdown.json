@@ -7,5 +7,5 @@
 	"ClassName": "port",
 	"InstanceName": "PORT-sd-sf-n5k-acc-3.sd.snms/436785152",
 	"EventName": "down",
-	"Source": "isTrapInList"
+	"Source": "DownOrFlapping"
 }

@@ -6,11 +6,11 @@ import FilterContent from './FilterContent.jsx';
 export default class App extends Component {
 	render () {
 		return (
-			<span>
+			<div style={{ height: '100%' }}>
 				<FilterMenu />
 				<FilterContent />
 				<Footer />
-			</span>
+			</div>
 		);
 	}
 }

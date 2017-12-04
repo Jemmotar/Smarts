@@ -4,7 +4,7 @@ import parseJson from 'parse-json';
 
 const TrapLoader = new function () {
 	/* Public varaibles */
-	this.source = path.join(__dirname, '/../../traps');
+	this.source = path.join(__dirname, '/../../data/traps');
 
 	/* Private functions */
 	function read (location) {
