@@ -37,15 +37,15 @@
 			"mode": "and",
 			"conditions": [
 				{
-					"logic": "not-regexp-match",
+					"logic": "not-includes",
 					"value": "NATIVE_VLAN_MISMATCH"
 				},
 				{
-					"logic": "not-regexp-match",
+					"logic": "not-includes",
 					"value": "DUPLEX_MISMATCH"
 				},
 				{
-					"logic": "not-regexp-match",
+					"logic": "not-includes",
 					"value": "Probe_State_Change"
 				}
 			]
@@ -55,20 +55,20 @@
 			"mode": "and",
 			"conditions": [
 				{
-					"logic": "not-regexp-match",
-					"value": ".*Gi2/25.*"
+					"logic": "not-includes",
+					"value": "Gi2/25"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*Gi2/26.*"
+					"logic": "not-includes",
+					"value": "Gi2/26"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*Gi2/27.*"
+					"logic": "not-includes",
+					"value": "Gi2/27"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*Gi2/28.*"
+					"logic": "not-includes",
+					"value": "Gi2/28"
 				},
 				{
 					"logic": "not-regexp-match",

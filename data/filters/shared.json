@@ -150,12 +150,12 @@
 					"value": "VOLT-gb012sw020gsnf7.gsni-pm.snms.*Te.*"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*@HUP@.*"
+					"logic": "not-includes",
+					"value": "@HUP@"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*SPAN.*"
+					"logic": "not-includes",
+					"value": "SPAN"
 				}
 			]
 		}

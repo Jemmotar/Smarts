@@ -14,8 +14,8 @@
 			"target": "InstanceName",
 			"conditions": [
 				{
-					"logic": "regexp-match",
-					"value": ".*Performance.*"
+					"logic": "includes",
+					"value": "Performance"
 				}
 			]
 		},
@@ -24,12 +24,12 @@
 			"mode": "and",
 			"conditions": [
 				{
-					"logic": "not-regexp-match",
-					"value": ".*@HUP@.*"
+					"logic": "not-includes",
+					"value": "@HUP@"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*SPAN.*"
+					"logic": "not-includes",
+					"value": "SPAN"
 				}
 			]
 		}

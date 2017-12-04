@@ -51,16 +51,16 @@
 			"mode": "and",
 			"conditions": [
 				{
-					"logic": "not-regexp-match",
-					"value": ".*NATIVE_VLAN_MISMATCH.*"
+					"logic": "not-includes",
+					"value": "NATIVE_VLAN_MISMATCH"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*DUPLEX_MISMATCH.*"
+					"logic": "not-includes",
+					"value": "DUPLEX_MISMATCH"
 				},
 				{
-					"logic": "not-regexp-match",
-					"value": ".*Probe_State_Change.*"
+					"logic": "not-includes",
+					"value": "Probe_State_Change"
 				}
 			]
 		}
