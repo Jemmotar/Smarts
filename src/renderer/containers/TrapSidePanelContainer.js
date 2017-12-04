@@ -6,7 +6,8 @@ function mapStateToProps (state) {
 	return {
 		isOpen: state.app.trap.isSidebarOpen,
 		traps: state.app.trap.list,
-		activeTrap: state.app.trap.active
+		activeTrap: state.app.trap.active,
+		activeStage: state.app.filter.activeStage
 	};
 }
 

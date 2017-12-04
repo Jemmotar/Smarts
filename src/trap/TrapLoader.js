@@ -25,12 +25,6 @@ const TrapLoader = new function () {
 			.filter((file) => file.includes('.json'))
 			.map((file) => file.replace('.json', ''));
 	};
-
-	this.getAll = () => {
-		return this.getFiles().map(
-			(fileName) => this.get(fileName)
-		);
-	};
 }();
 
 export default TrapLoader;
