@@ -1,0 +1,11 @@
+{
+	"Class": "Firewall",
+	"Name": "gb02qfw030o2pn7.o2.snms",
+	"Event": "DiscoveryError",
+	"ElementClass": "Firewall",
+	"ElementName": "gb02qfw030o2pn7.o2.snms",
+	"ClassName": "Firewall",
+	"InstanceName": "gb02qfw030o2pn7.o2.snms",
+	"EventName": "DiscoveryError",
+	"Source": "SNMS-o2"
+}

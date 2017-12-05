@@ -1,0 +1,11 @@
+{
+	"Class": "Firewall",
+	"Name": "IXEP59PI565-02.isabel.snms",
+	"Event": "DiscoveryError",
+	"ElementClass": "Firewall",
+	"ElementName": "IXEP59PI565-02.isabel.snms",
+	"ClassName": "Firewall",
+	"InstanceName": "IXEP59PI565-02.isabel.snms",
+	"EventName": "DiscoveryError",
+	"Source": "SNMS-ISABEL"
+}

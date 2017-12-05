@@ -1,0 +1,11 @@
+{
+	"Class": "Host",
+	"Name": "172.30.0.166",
+	"Event": "linkDown",
+	"ElementClass": "Node",
+	"ElementName": "gb39rlgdrsw010.rlg.snms",
+	"ClassName": "Host",
+	"InstanceName": "172.30.0.166",
+	"EventName": "linkDown",
+	"Source": "Trap Processor"
+}

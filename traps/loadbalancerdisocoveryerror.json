@@ -1,0 +1,11 @@
+{
+	"Class": "LoadBalancer",
+	"Name": "ace_sw1-application.sd.snms",
+	"Event": "DiscoveryError",
+	"ElementClass": "LoadBalancer",
+	"ElementName": "ace_sw1-application.sd.snms",
+	"ClassName": "LoadBalancer",
+	"InstanceName": "ace_sw1-application.sd.snms",
+	"EventName": "DiscoveryError",
+	"Source": "SNMS-SHOPD"
+}

@@ -1,0 +1,11 @@
+{
+	"Class": "Fan",
+	"Name": "FAN-gb014rt010gsnf7.gsni-pm.snms/2 [Fan  2]",
+	"Event": "StateNotNormal",
+	"ElementClass": "Router",
+	"ElementName": "gb014rt010gsnf7.gsni-pm.snms",
+	"ClassName": "Fan_Fault_CiscoEnvMon",
+	"InstanceName": "I-Fan_Fault_CiscoEnvMon-FAN-gb014rt010gsnf7.gsni-pm.snms/2",
+	"EventName": "StateNotNormal",
+	"Source": "SNMS-GSNI-PM"
+}

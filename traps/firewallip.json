@@ -1,0 +1,11 @@
+{
+	"Class": "Firewall",
+	"Name": "129.35.65.163",
+	"Event": "DiscoveryError",
+	"ElementClass": "Firewall",
+	"ElementName": "129.35.65.163",
+	"ClassName": "Firewall",
+	"InstanceName": "129.35.65.163",
+	"EventName": "DiscoveryError",
+	"Source": "SNMS-GSNI-PM"
+}

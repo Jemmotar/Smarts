@@ -1,0 +1,11 @@
+{
+	"Class": "DuplicateIP",
+	"Name": "172.29.57.3",
+	"Event": "Duplicate",
+	"ElementClass": "Node",
+	"ElementName": "iwwk-swsry-sni-dcnvcb-02.dcnv-pm.snms",
+	"ClassName": "DuplicateIP",
+	"InstanceName": "IP-172.29.57.3",
+	"EventName": "Duplicate",
+	"Source": "SNMS-GSNI-PM"
+}

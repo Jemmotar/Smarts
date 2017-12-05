@@ -1,0 +1,11 @@
+{
+	"Class": "Firewall",
+	"Name": "gb022cf010gsnfm.gsni-pm.snms",
+	"Event": "DiscoveryError",
+	"ElementClass": "Firewall",
+	"ElementName": "gb022cf010gsnfm.gsni-pm.snms",
+	"ClassName": "Firewall",
+	"InstanceName": "gb022cf010gsnfm.gsni-pm.snms",
+	"EventName": "DiscoveryError",
+	"Source": "SNMS-GSNI-PM"
+}

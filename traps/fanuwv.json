@@ -1,0 +1,11 @@
+{
+	"Class": "Fan",
+	"Name": "FAN-maep40c4507-01-ca1.uwv.snms/3 [Power Supply 2 Fan]",
+	"Event": "StateNotNormal",
+	"ElementClass": "Switch",
+	"ElementName": "maep40c4507-01-ca1.uwv.snms",
+	"ClassName": "Fan_Fault_CiscoEnvMon",
+	"InstanceName": "I-Fan_Fault_CiscoEnvMon-FAN-maep40c4507-01-ca1.uwv.snms/3",
+	"EventName": "StateNotNormal",
+	"Source": "SNMS-SRShared"
+}
