@@ -1,0 +1,11 @@
+{
+	"Class": "Fan",
+	"Name": "FAN-gb01qfw050argn7.argos.snms/7 [Fan-7]",
+	"Event": "StateNotNormal",
+	"ElementClass": "Firewall",
+	"ElementName": "gb01qfw050argn7.argos.snms",
+	"ClassName": "Fan_Fault_NokiaEnvMon",
+	"InstanceName": "I-Fan_Fault_NokiaEnvMon-FAN-gb01qfw050argn7.argos.snms/7",
+	"EventName": "StateNotNormal",
+	"Source": "SNMS-shared-PM"
+}

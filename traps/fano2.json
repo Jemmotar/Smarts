@@ -1,0 +1,11 @@
+{
+	"Class": "Fan",
+	"Name": "FAN-gb02qfw040o2pn7.o2.snms/7 [Fan-7]",
+	"Event": "StateNotNormal",
+	"ElementClass": "Firewall",
+	"ElementName": "gb02qfw040o2pn7.o2.snms",
+	"ClassName": "Fan_Fault_NokiaEnvMon",
+	"InstanceName": "I-Fan_Fault_NokiaEnvMon-FAN-gb02qfw040o2pn7.o2.snms/7",
+	"EventName": "StateNotNormal",
+	"Source": "SNMS-o2"
+}
