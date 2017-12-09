@@ -5,6 +5,7 @@
 	],
 	"plugins": [
 		"babel-plugin-root-import",
-		"transform-object-rest-spread"
+		"transform-object-rest-spread",
+		"transform-private-underscore"
   ]
 }

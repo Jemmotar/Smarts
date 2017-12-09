@@ -1,30 +1,29 @@
-import fs from 'fs';
 import path from 'path';
-import parseJson from 'parse-json';
+import DirectoryJsonLoader from '~/src/common/DirectoryJsonLoader.js';
 
-const TrapLoader = new function () {
-	/* Public varaibles */
-	this.source = path.join(__dirname, '/../../data/traps');
-
-	/* Private functions */
-	function read (location) {
-		return parseJson(fs.readFileSync(location).toString(), path.basename(location));
+class TrapLoader extends DirectoryJsonLoader {
+	/**
+	 * Create a trap loader
+	 */
+	constructor () {
+		super(path.join(__dirname, '/../../data/traps'));
 	}
 
-	/* Public functions */
-	this.get = (trapName) => {
-		const location = path.join(this.source, trapName + '.json');
-		const trap = read(location);
-		trap.id = trapName;
+	/**
+	 * Load trap from global trap directory
+	 * @param  {String} filename Name of trap to load
+	 * @return {Object}          Trap
+	 */
+	load (filename) {
+		// Load trap using json loader
+		const trap = super.load(filename);
+		// Add id to trap properties
+		// TODO: Make this internal or move saved properties to data key
+		trap.id = filename;
+
 		return trap;
-	};
+	}
+}
 
-	this.getFiles = () => {
-		return fs
-			.readdirSync(this.source)
-			.filter((file) => file.includes('.json'))
-			.map((file) => file.replace('.json', ''));
-	};
-}();
-
-export default TrapLoader;
+// Export class as static object
+export default new TrapLoader();

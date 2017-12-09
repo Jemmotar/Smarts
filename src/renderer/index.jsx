@@ -25,7 +25,7 @@ function errorHandler (error, getState, lastAction, dispatch) {
 }
 
 // Watch for changes in filter folder
-watch(FilterLoader.source, { filter: /\.json$/ }, (e, filename) => {
+watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	// Get only base filename
 	filename = path.basename(filename, '.json');
 	// Perform acction depending on event type
@@ -43,7 +43,7 @@ watch(FilterLoader.source, { filter: /\.json$/ }, (e, filename) => {
 });
 
 // Watch for changes in trap folder
-watch(TrapLoader.source, { filter: /\.json$/ }, (e, filename) => {
+watch(TrapLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	// Get only base filename
 	filename = path.basename(filename, '.json');
 	// Perform acction depending on event type

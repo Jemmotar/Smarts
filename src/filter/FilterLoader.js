@@ -1,42 +1,40 @@
-import fs from 'fs';
 import path from 'path';
-import parseJson from 'parse-json';
-import Filter from './Filter';
-import Stage from './Stage';
+import DirectoryJsonLoader from '~/src/common/DirectoryJsonLoader.js';
+import Filter from '~/src/filter/Filter';
+import Stage from '~/src/filter/Stage';
 
-const FilterLoader = new function () {
-	/* Public variables */
-	this.source = path.join(__dirname, '/../../data/filters');
-
-	/* Private functions */
-	function read (location) {
-		return parseJson(fs.readFileSync(location).toString(), path.basename(location));
+class FilterLoader extends DirectoryJsonLoader {
+	/**
+	 * Create filter loader
+	 */
+	constructor () {
+		super(path.join(__dirname, '/../../data/filters'));
 	}
 
-	/* Public functions */
-	this.get = (filterName) => {
-		const location = path.join(this.source, filterName + '.json');
-		const filterContent = read(location);
+	/**
+	 * Load filter from global filter directory
+	 * @param  {String} filename Name of filter to load
+	 * @return {Object}          Filter with stages
+	 */
+	load (filename) {
+		// Load filter content using JSON loader
+		const content = super.load(filename);
 
-		const stages = filterContent.stages.map(
+		// Construct stage instaces from filter content
+		const stages = content.stages.map(
 			(s, index) => new Stage(index, s.target, s.conditions, s.mode)
 		);
 
+		// Create filter instance from filter contnet
 		const filter = new Filter(
-			filterName,
-			filterContent.name,
+			filename,
+			content.name,
 			stages
 		);
 
 		return filter;
-	};
+	}
+}
 
-	this.getFiles = () => {
-		return fs
-			.readdirSync(this.source)
-			.filter((file) => file.includes('.json'))
-			.map((file) => file.replace('.json', ''));
-	};
-}();
-
-export default FilterLoader;
+// Export class as static object
+export default new FilterLoader();

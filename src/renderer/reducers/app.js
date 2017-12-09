@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
 			};
 
 		case FILTER_CHANGED:
-			const loadedFilter = FilterLoader.get(action.id);
+			const loadedFilter = FilterLoader.load(action.id);
 			if (!loadedFilter) return state;
 			const isInList = state.filter.list.find((f) => f.id === action.id) !== undefined;
 			const hasStage = loadedFilter.stages && loadedFilter.stages.length > 0;
@@ -97,7 +97,7 @@ export default (state = initialState, action) => {
 			};
 
 		case TRAP_CHANGED:
-			const loadedTrap = TrapLoader.get(action.id);
+			const loadedTrap = TrapLoader.load(action.id);
 			if (!loadedTrap) return state;
 			const isTrapInList = state.trap.list.find((t) => t.id === action.id) !== undefined;
 			return {
