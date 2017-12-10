@@ -8,7 +8,7 @@ import watch from 'node-watch';
 import path from 'path';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { notifyFilterChange, notifyTrapChange, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
+import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
 
 import reducers from './reducers';
 import App from './components/App.jsx';
@@ -31,10 +31,11 @@ watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	// Perform acction depending on event type
 	switch (e) {
 		case 'update':
+			const state = store.getState();
 			store.dispatch(clearErrors());
-			store.dispatch(notifyFilterChange(filename));
-			store.dispatch(selectFilter(store.getState().app.filter.activeFilter.id));
-			store.dispatch(selectTrap(null));
+			store.dispatch(loadFilter(filename));
+			store.dispatch(selectFilter(state.app.filter.activeFilter.id));
+			store.dispatch(selectTrap(state.app.trap.active === null ? null : state.app.trap.active.id));
 			return;
 
 		case 'remove':
@@ -50,7 +51,7 @@ watch(TrapLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	switch (e) {
 		case 'update':
 			store.dispatch(clearErrors());
-			store.dispatch(notifyTrapChange(filename));
+			store.dispatch(loadTrap(filename));
 			store.dispatch(selectTrap(filename));
 			return;
 
@@ -61,12 +62,12 @@ watch(TrapLoader.location, { filter: /\.json$/ }, (e, filename) => {
 
 // Load all filters
 for (const filename of FilterLoader.getFiles()) {
-	store.dispatch(notifyFilterChange(filename));
+	store.dispatch(loadFilter(filename));
 }
 
 // Load all traps
 for (const filename of TrapLoader.getFiles()) {
-	store.dispatch(notifyTrapChange(filename));
+	store.dispatch(loadTrap(filename));
 }
 
 // Render DOM

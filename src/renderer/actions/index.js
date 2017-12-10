@@ -6,10 +6,10 @@ export function selectFilter (id) {
 	};
 }
 
-export const FILTER_CHANGED = 'FILTER_CHANGED';
-export function notifyFilterChange (id) {
+export const FILTER_LOAD = 'FILTER_LOAD';
+export function loadFilter (id) {
 	return {
-		type: FILTER_CHANGED,
+		type: FILTER_LOAD,
 		id
 	};
 }
@@ -38,10 +38,10 @@ export function selectTrap (id) {
 	};
 }
 
-export const TRAP_CHANGED = 'TRAP_CHANGED';
-export function notifyTrapChange (id) {
+export const TRAP_LOAD = 'TRAP_LOAD';
+export function loadTrap (id) {
 	return {
-		type: TRAP_CHANGED,
+		type: TRAP_LOAD,
 		id
 	};
 }

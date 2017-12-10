@@ -1,6 +1,6 @@
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { FILTER_SELECT, FILTER_CHANGED, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_CHANGED, TRAP_REMOVE, TRAP_SIDEBAR_TOGGLE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
+import { FILTER_SELECT, FILTER_LOAD, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_LOAD, TRAP_REMOVE, TRAP_SIDEBAR_TOGGLE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
 	filter: {
@@ -26,12 +26,18 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case FILTER_SELECT:
 			const newFilter = state.filter.list.find((f) => f.id === action.id);
+			const isAllreadySelected = state.filter.activeFilter === null ? false : state.filter.activeFilter.id === newFilter.id;
+			const selectedStageId = isAllreadySelected ? newFilter.stages.findIndex((s) => s.id === state.filter.activeStage.id) : 0;
 			return {
 				...state,
 				filter: {
 					...state.filter,
 					activeFilter: newFilter,
-					activeStage: newFilter ? (newFilter.stages.length > 0 ? newFilter.stages[0] : null) : null
+					activeStage: newFilter
+						? newFilter.stages.length > 0
+								? newFilter.stages[selectedStageId > -1 ? selectedStageId : 0]
+								: null
+						: null
 				},
 				evaluation: {
 					...state.evaluation,
@@ -39,7 +45,7 @@ export default (state = initialState, action) => {
 				}
 			};
 
-		case FILTER_CHANGED:
+		case FILTER_LOAD:
 			const loadedFilter = FilterLoader.load(action.id);
 			if (!loadedFilter) return state;
 			const isInList = state.filter.list.find((f) => f.id === action.id) !== undefined;
@@ -96,7 +102,7 @@ export default (state = initialState, action) => {
 				}
 			};
 
-		case TRAP_CHANGED:
+		case TRAP_LOAD:
 			const loadedTrap = TrapLoader.load(action.id);
 			if (!loadedTrap) return state;
 			const isTrapInList = state.trap.list.find((t) => t.id === action.id) !== undefined;
@@ -127,7 +133,6 @@ export default (state = initialState, action) => {
 			};
 
 		case TRAP_SIDEBAR_TOGGLE:
-			console.log(state.trap.isSidebarOpen);
 			return {
 				...state,
 				trap: {
