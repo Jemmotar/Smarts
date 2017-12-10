@@ -1,3 +1,5 @@
+import RegExpCache from '~/src/common/RegExpCache.js'
+
 // Stage - one step (line) in filter
 const Stage = function (id, target, conditions, mode) {
 	/* Public variables */
@@ -5,9 +7,6 @@ const Stage = function (id, target, conditions, mode) {
 	this.target = target;
 	this.conditions = conditions;
 	this.mode = mode === undefined ? 'or' : mode;
-
-	/* Private variables */
-	const regexCache = {};
 
 	/* Public functions */
 	this.evaluate = (evaluation) => {
@@ -51,14 +50,6 @@ const Stage = function (id, target, conditions, mode) {
 		}
 	}
 
-	function getRegexp (key) {
-		if (regexCache[key] === undefined) {
-			regexCache[key] = new RegExp(key, 'g');
-		}
-
-		return regexCache[key];
-	}
-
 	function evaluateCondition (condition, targetValue, evaluation) {
 		let result = null;
 
@@ -96,11 +87,11 @@ const Stage = function (id, target, conditions, mode) {
 				break;
 
 			case 'regexp-match':
-				result = getRegexp(condition.value).test(targetValue);
+				result = RegExpCache.get(condition.value).test(targetValue);
 				break;
 
 			case 'not-regexp-match':
-				result = !getRegexp(condition.value).test(targetValue);
+				result = !RegExpCache.get(condition.value).test(targetValue);
 				break;
 
 			default:
