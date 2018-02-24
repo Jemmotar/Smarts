@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Message } from 'semantic-ui-react';
 
 export default class StageContent extends Component {
@@ -35,3 +36,8 @@ export default class StageContent extends Component {
 		);
 	}
 }
+
+StageContent.propTypes = {
+	evaluation: PropTypes.object,
+	stage: PropTypes.object
+};

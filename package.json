@@ -1,33 +1,65 @@
 {
   "name": "smarts",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Evaluation simulator for Smarts Network Filters solution",
-  "main": "./src/main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron ./src/app.js"
+    "dev": "cross-env START_MAIN=1 npm run start-renderer-dev",
+    "start": "cross-env NODE_ENV=production electron ./dist/main.prod.js",
+    "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r babel-register ./src/client/core/main.js",
+    "start-renderer-dev": "cross-env NODE_ENV=development node --trace-warnings -r babel-register ./node_modules/webpack-dev-server/bin/webpack-dev-server --config ./config/webpack.config.renderer.dev.js",
+    "build": "npm run build-main & npm run build-renderer",
+    "build-main": "cross-env NODE_ENV=production node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config ./config/webpack.config.main.prod.js --colors",
+    "build-renderer": "cross-env NODE_ENV=production node --trace-warnings -r babel-register ./node_modules/webpack/bin/webpack --config ./config/webpack.config.renderer.prod.js --colors"
   },
+  "keywords": [
+    "electron",
+    "react",
+    "redux"
+  ],
   "author": "Filipsi, Jemmotar",
   "license": "GPL-3.0",
   "dependencies": {
+    "cross-env": "^5.1.1",
     "node-watch": "^0.5.5",
     "parse-json": "^4.0.0",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-catch": "^1.3.1",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.76.0"
+    "semantic-ui-react": "^0.76.0",
+    "source-map-support": "^0.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-plugin-root-import": "^5.1.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-private-underscore": "^0.1.3",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "babili-webpack-plugin": "0.1.1",
+    "copy-webpack-plugin": "^4.3.0",
+    "css-loader": "^0.28.7",
     "electron": "^1.7.9",
-    "redux-devtools": "^3.4.1"
+    "electron-devtools-installer": "^2.2.1",
+    "eslint": "^4.18.1",
+    "eslint-config-happiness": "^10.2.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "file-loader": "^1.1.9",
+    "react-hot-loader": "^3.1.3",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   }
 }

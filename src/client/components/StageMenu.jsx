@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Menu, Label } from 'semantic-ui-react';
 
 export default class StageMenu extends Component {
@@ -17,10 +18,12 @@ export default class StageMenu extends Component {
 	}
 
 	render () {
+		const { activeFilter, activeStage, selectStage } = this.props;
+
 		return (
 			<Menu pointing secondary vertical style={{width: '100%'}}>
-				{this.props.activeFilter && this.props.activeFilter.stages.map((stage, index) => (
-					<Menu.Item key={index} data-index={index} active={this.props.activeStage.id === index} name={stage.target} onClick={this.props.selectStage}>
+				{activeFilter && activeFilter.stages.map((stage, index) => (
+					<Menu.Item key={index} data-index={index} active={activeStage.id === index} name={stage.target} onClick={selectStage}>
 						{stage.target}
 						<Label circular empty color={this.getLabelColor(stage)} />
 						<Label size="mini" color="blue" style={{width: '32px'}}>
@@ -35,3 +38,10 @@ export default class StageMenu extends Component {
 		);
 	}
 }
+
+StageMenu.propTypes = {
+	evaluation: PropTypes.object,
+	activeFilter: PropTypes.object,
+	activeStage: PropTypes.object,
+	selectStage: PropTypes.func
+};

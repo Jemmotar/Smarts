@@ -1,24 +1,25 @@
+import path from 'path';
+import watch from 'node-watch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reduxCatch from 'redux-catch';
-import watch from 'node-watch';
 
-import path from 'path';
 import FilterLoader from '~/src/filter/FilterLoader.js';
 import TrapLoader from '~/src/trap/TrapLoader.js';
-import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
+import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from '../actions';
 
-import reducers from './reducers';
-import App from './components/App.jsx';
+import reducers from '../reducers';
+import HmrContainer from './HmrContainer.js';
+import App from '../components/App.jsx';
 
 // Application store
 const store = createStore(reducers, applyMiddleware(
-  reduxCatch(errorHandler)
+	reduxCatch(errorHandler)
 ));
 
-// Error hander for redux catch
+// Error hander for Redux catch
 function errorHandler (error, getState, lastAction, dispatch) {
 	console.error(error);
 	dispatch(addError(error));
@@ -28,7 +29,7 @@ function errorHandler (error, getState, lastAction, dispatch) {
 watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	// Get only base filename
 	filename = path.basename(filename, '.json');
-	// Perform acction depending on event type
+	// Perform action depending on event type
 	switch (e) {
 		case 'update':
 			const state = store.getState();
@@ -47,7 +48,7 @@ watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 watch(TrapLoader.location, { filter: /\.json$/ }, (e, filename) => {
 	// Get only base filename
 	filename = path.basename(filename, '.json');
-	// Perform acction depending on event type
+	// Perform action depending on event type
 	switch (e) {
 		case 'update':
 			store.dispatch(clearErrors());
@@ -70,10 +71,30 @@ for (const filename of TrapLoader.getFiles()) {
 	store.dispatch(loadTrap(filename));
 }
 
-// Render DOM
-ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('root')
-);
+/**
+ * Wrapper around ReactDOM render
+ * Will reader given component wrapped in react hot reload into the root DOM element
+ */
+function render (Component) {
+	ReactDOM.render(
+		<HmrContainer>
+			<Provider store={store}>
+				<Component />
+			</Provider>
+		</HmrContainer>,
+		document.getElementById('root')
+	);
+};
+
+// Initial application render
+render(App);
+
+// Tweak React components in real time
+// https://github.com/gaearon/react-hot-loader#getting-started
+if (module.hot) {
+	module.hot.accept('../components/App.jsx', () =>
+		render(
+			require('../components/App.jsx').default
+		)
+	);
+}

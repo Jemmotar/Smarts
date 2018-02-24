@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Menu, Label, Checkbox } from 'semantic-ui-react';
 
 export default class FilterMenu extends Component {
@@ -33,3 +34,11 @@ export default class FilterMenu extends Component {
 		);
 	}
 }
+
+FilterMenu.propTypes = {
+	filters: PropTypes.array,
+	activeFilter: PropTypes.object,
+	evaluations: PropTypes.array,
+	selectFilter: PropTypes.func,
+	toggleSidebar: PropTypes.func
+};
