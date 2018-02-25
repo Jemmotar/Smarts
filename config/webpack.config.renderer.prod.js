@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import BabiliPlugin from 'babili-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ElectronPackager from 'webpack-electron-packager';
 
 const publicPath = path.join(__dirname, '../dist');
 const entryFile = path.join(__dirname, '../src/client/core/renderer.js');
@@ -53,17 +54,35 @@ export default {
 
 	plugins: [
 		new BabiliPlugin(),
+		new webpack.DefinePlugin(
+			{
+				'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+			}
+		),
 		new CopyWebpackPlugin(
 			[
 				{
 					from: path.join(__dirname, '../src/client/core/index.html'),
 					to: publicPath
+				},
+				{
+					from: path.join(__dirname, '../package.json'),
+					to: publicPath
+				},
+				{
+					from: path.join(__dirname, '../data'),
+					to: '../dist/data'
 				}
 			]
 		),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
-		})
+		new ElectronPackager(
+			{
+				dir: publicPath,
+				arch: 'x64',
+				platform: 'win32',
+				overwrite: true
+			}
+		)
 	],
 
 	node: {
