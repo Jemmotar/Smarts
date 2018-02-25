@@ -6,8 +6,8 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reduxCatch from 'redux-catch';
 
-import FilterLoader from '~/src/filter/FilterLoader.js';
-import TrapLoader from '~/src/trap/TrapLoader.js';
+import FilterLoader from '../../filter/FilterLoader.js';
+import TrapLoader from '../../trap/TrapLoader.js';
 import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from '../actions';
 
 import reducers from '../reducers';
@@ -27,8 +27,8 @@ function errorHandler (error, getState, lastAction, dispatch) {
 
 // Watch for changes in filter folder
 watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
-	// Get only base filename
 	filename = path.basename(filename, '.json');
+
 	// Perform action depending on event type
 	switch (e) {
 		case 'update':
@@ -46,8 +46,8 @@ watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 
 // Watch for changes in trap folder
 watch(TrapLoader.location, { filter: /\.json$/ }, (e, filename) => {
-	// Get only base filename
 	filename = path.basename(filename, '.json');
+
 	// Perform action depending on event type
 	switch (e) {
 		case 'update':

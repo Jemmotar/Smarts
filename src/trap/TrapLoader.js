@@ -1,12 +1,12 @@
 import path from 'path';
-import DirectoryJsonLoader from '~/src/common/DirectoryJsonLoader.js';
+import DirectoryJsonLoader from '../common/DirectoryJsonLoader.js';
 
 class TrapLoader extends DirectoryJsonLoader {
 	/**
 	 * Create a trap loader
 	 */
 	constructor () {
-		super(path.join(__dirname, '/../../data/traps'));
+		super(path.join(__dirname, '../../data/traps'));
 	}
 
 	/**

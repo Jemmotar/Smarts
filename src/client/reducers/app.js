@@ -1,5 +1,5 @@
-import FilterLoader from '~/src/filter/FilterLoader.js';
-import TrapLoader from '~/src/trap/TrapLoader.js';
+import FilterLoader from '../../filter/FilterLoader.js';
+import TrapLoader from '../../trap/TrapLoader.js';
 import { FILTER_SELECT, FILTER_LOAD, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_LOAD, TRAP_REMOVE, TRAP_SIDEBAR_TOGGLE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
@@ -35,8 +35,8 @@ export default (state = initialState, action) => {
 					activeFilter: newFilter,
 					activeStage: newFilter
 						? newFilter.stages.length > 0
-								? newFilter.stages[selectedStageId > -1 ? selectedStageId : 0]
-								: null
+							? newFilter.stages[selectedStageId > -1 ? selectedStageId : 0]
+							: null
 						: null
 				},
 				evaluation: {

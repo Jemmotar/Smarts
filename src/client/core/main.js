@@ -72,11 +72,11 @@ async function createWindow () {
 	win.loadURL(`file://${__dirname}/index.html`);
 
 	// Open DevTools for debuggins if app is in development mode
-	//if (process.env.NODE_ENV === 'development') {
+	if (process.env.NODE_ENV === 'development') {
 		win.openDevTools({
 			mode: 'detach'
 		});
-	//}
+	}
 
 	// Emitted when the window is closed.
 	// Clear global window reference.

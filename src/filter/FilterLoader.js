@@ -1,14 +1,14 @@
 import path from 'path';
-import DirectoryJsonLoader from '~/src/common/DirectoryJsonLoader.js';
-import Filter from '~/src/filter/Filter';
-import Stage from '~/src/filter/Stage';
+import DirectoryJsonLoader from '../common/DirectoryJsonLoader.js';
+import Filter from './Filter.js';
+import Stage from './Stage.js';
 
 class FilterLoader extends DirectoryJsonLoader {
 	/**
 	 * Create filter loader
 	 */
 	constructor () {
-		super(path.join(__dirname, '/../../data/filters'));
+		super(path.join(__dirname, '../../data/filters'));
 	}
 
 	/**

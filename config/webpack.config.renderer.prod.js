@@ -27,7 +27,6 @@ export default {
 				exclude: /node_modules/,
 				options: {
 					plugins: [
-						'babel-plugin-root-import',
 						'transform-object-rest-spread',
 						'transform-private-underscore'
 					],
@@ -53,22 +52,7 @@ export default {
 	},
 
 	plugins: [
-		/**
-		 * The DefinePlugin allows you to create global constants which can be configured at compile time.
-		 * https://webpack.js.org/plugins/define-plugin/
-		 */
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
-		}),
-		/**
-		 * Babli is an ES6+ aware minifier based on the Babel toolchain (beta)
-		 * https://github.com/webpack-contrib/babel-minify-webpack-plugin
-		 */
 		new BabiliPlugin(),
-		/**
-		 * Copies individual files or entire directories to the build directory.
-		 * https://github.com/webpack-contrib/copy-webpack-plugin
-		 */
 		new CopyWebpackPlugin(
 			[
 				{
@@ -76,8 +60,12 @@ export default {
 					to: publicPath
 				}
 			]
-		)
+		),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+		})
 	],
+
 	node: {
 		__dirname: true,
 		__filename: true
