@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import ElectronPackager from 'webpack-electron-packager';
 
 const root = path.resolve(__dirname, '../../..');
 const publicPath = path.join(root, 'dist');
@@ -77,12 +76,6 @@ export default {
 				from: path.join(root, 'data'),
 				to: path.join(publicPath, 'data')
 			}
-		]),
-		new ElectronPackager({
-			dir: publicPath,
-			arch: 'x64',
-			platform: 'win32',
-			overwrite: true
-		})
+		])
 	]
 };
