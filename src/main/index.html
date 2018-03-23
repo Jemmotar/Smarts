@@ -12,11 +12,9 @@
 
 			// Dynamically insert the bundled app script into renderer process
 			scripts.push(
-				process.env.HOT
+				process.env.NODE_ENV === 'development'
 					? `http://localhost:${process.env.PORT || 8080}/dist/renderer.dev.js`
-					: process.env.NODE_ENV === 'development'
-						? './dist/renderer.prod.js'
-						: 'renderer.prod.js'
+					: 'renderer.prod.js'
 			);
 
 			// Append scripts to the document

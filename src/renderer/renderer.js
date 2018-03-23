@@ -6,13 +6,13 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import reduxCatch from 'redux-catch';
 
-import FilterLoader from '../../filter/FilterLoader.js';
-import TrapLoader from '../../trap/TrapLoader.js';
-import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from '../actions';
+import FilterLoader from '../logic/filter/FilterLoader.js';
+import TrapLoader from '../logic/trap/TrapLoader.js';
+import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
 
-import reducers from '../reducers';
-import HmrContainer from './HmrContainer.js';
-import App from '../components/App.jsx';
+import reducers from './reducers';
+import HmrContainer from './containers/HmrContainer.js';
+import App from './components/App.jsx';
 
 // Application store
 const store = createStore(reducers, applyMiddleware(
@@ -92,9 +92,9 @@ render(App);
 // Tweak React components in real time
 // https://github.com/gaearon/react-hot-loader#getting-started
 if (module.hot) {
-	module.hot.accept('../components/App.jsx', () =>
+	module.hot.accept('./components/App.jsx', () =>
 		render(
-			require('../components/App.jsx').default
+			require('./components/App.jsx').default
 		)
 	);
 }

@@ -1,6 +1,6 @@
 import path from 'path';
 import { remote } from 'electron';
-import DirectoryJsonLoader from '../common/DirectoryJsonLoader.js';
+import DirectoryJsonLoader from '../DirectoryJsonLoader.js';
 
 class TrapLoader extends DirectoryJsonLoader {
 	/**
@@ -9,7 +9,7 @@ class TrapLoader extends DirectoryJsonLoader {
 	constructor () {
 		super(
 			process.env.NODE_ENV === 'development'
-				? path.join(__dirname, '../../data/traps')
+				? path.join(__dirname, '../../../data/traps')
 				: path.join(remote.app.getAppPath(), 'data/traps')
 		);
 	}

@@ -1,5 +1,5 @@
-import FilterLoader from '../../filter/FilterLoader.js';
-import TrapLoader from '../../trap/TrapLoader.js';
+import FilterLoader from '../../logic/filter/FilterLoader.js';
+import TrapLoader from '../../logic/trap/TrapLoader.js';
 import { FILTER_SELECT, FILTER_LOAD, FILTER_REMOVE, STAGE_SELECT, TRAP_SELECT, TRAP_LOAD, TRAP_REMOVE, TRAP_SIDEBAR_TOGGLE, ERROR_ADD, ERROR_REMOVE, ERROR_CLEAR } from './../actions';
 
 const initialState = {
@@ -58,7 +58,7 @@ export default (state = initialState, action) => {
 						? state.filter.list.map((f) => f.id === action.id ? loadedFilter : f) /* Update */
 						: [ ...state.filter.list, loadedFilter ] /* Add new */,
 					activeFilter: state.filter.activeFilter ? state.filter.activeFilter : loadedFilter, /* If nothing is selected, select first filter */
-					activeStage: state.filter.activeStage ? state.filter.activeStage : (hasStage ? loadedFilter.stages[0] : null)  /* If nothing is selected, select first stage in first filter */
+					activeStage: state.filter.activeStage ? state.filter.activeStage : (hasStage ? loadedFilter.stages[0] : null) /* If nothing is selected, select first stage in first filter */
 				},
 				evaluation: {
 					...state.evaluation,

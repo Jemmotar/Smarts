@@ -1,6 +1,6 @@
 import path from 'path';
 import { remote } from 'electron';
-import DirectoryJsonLoader from '../common/DirectoryJsonLoader.js';
+import DirectoryJsonLoader from '../DirectoryJsonLoader.js';
 import Filter from './Filter.js';
 import Stage from './Stage.js';
 
@@ -11,7 +11,7 @@ class FilterLoader extends DirectoryJsonLoader {
 	constructor () {
 		super(
 			process.env.NODE_ENV === 'development'
-				? path.join(__dirname, '../../data/filters')
+				? path.join(__dirname, '../../../data/filters')
 				: path.join(remote.app.getAppPath(), 'data/filters')
 		);
 	}

@@ -1,4 +1,4 @@
-import RegExpCache from '../common/RegExpCache.js';
+import RegExpCache from '../RegExpCache.js';
 
 // Stage - one step (line) in filter
 const Stage = function (id, target, conditions, mode) {
