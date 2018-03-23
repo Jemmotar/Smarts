@@ -27,10 +27,10 @@ export default class TrapSidePanel extends Component {
 					</Table.Header>
 
 					<Table.Body>
-						{Object.keys(activeTrap).map((key, index) => (
-							<Table.Row key={index} active={activeStage && activeStage.target === key}>
-								<Table.Cell>{key}</Table.Cell>
-								<Table.Cell>{activeTrap[key]}</Table.Cell>
+						{activeTrap.getProperties().map((propertyName) => (
+							<Table.Row key={propertyName} active={activeStage && activeStage.target === propertyName}>
+								<Table.Cell>{propertyName}</Table.Cell>
+								<Table.Cell>{activeTrap.getProperty(propertyName)}</Table.Cell>
 							</Table.Row>
 						))}
 					</Table.Body>

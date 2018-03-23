@@ -1,10 +1,18 @@
 import path from 'path';
 import { remote } from 'electron';
+import Trap from './Trap.js';
 import DirectoryJsonLoader from '../DirectoryJsonLoader.js';
 
+/**
+ * A singletron loader that is creating instances of {Trap} from saved files
+ *
+ * @class TrapLoader
+ * @extends {DirectoryJsonLoader}
+ */
 class TrapLoader extends DirectoryJsonLoader {
 	/**
-	 * Create a trap loader
+	 * Creates an instance of TrapLoader.
+	 * @memberof TrapLoader
 	 */
 	constructor () {
 		super(
@@ -15,20 +23,18 @@ class TrapLoader extends DirectoryJsonLoader {
 	}
 
 	/**
-	 * Load trap from global trap directory
-	 * @param  {String} filename Name of trap to load
-	 * @return {Object}          Trap
+	 * Load Trap from global trap directory
+	 *
+	 * @param {any} filename A name of file to read
+	 * @returns Trap
+	 * @memberof TrapLoader
 	 */
 	load (filename) {
-		// Load trap using json loader
-		const trap = super.load(filename);
-		// Add id to trap properties
-		// TODO: Make this internal or move saved properties to data key
-		trap.id = filename;
-
-		return trap;
+		return new Trap(
+			filename,
+			super.load(filename)
+		);
 	}
 }
 
-// Export class as static object
 export default new TrapLoader();

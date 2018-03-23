@@ -4,9 +4,16 @@ import DirectoryJsonLoader from '../DirectoryJsonLoader.js';
 import Filter from './Filter.js';
 import Stage from './Stage.js';
 
+/**
+ * A singletron loader that is creating instances of {Filter} from saved files
+ *
+ * @class FilterLoader
+ * @extends {DirectoryJsonLoader}
+ */
 class FilterLoader extends DirectoryJsonLoader {
 	/**
-	 * Create filter loader
+	 * Creates an instance of FilterLoader.
+	 * @memberof FilterLoader
 	 */
 	constructor () {
 		super(
@@ -17,9 +24,11 @@ class FilterLoader extends DirectoryJsonLoader {
 	}
 
 	/**
-	 * Load filter from global filter directory
-	 * @param  {String} filename Name of filter to load
-	 * @return {Object}          Filter with stages
+	 * Load Filter from global filter directory
+	 *
+	 * @param {String} filename Name of filter to load
+	 * @returns {Filter}
+	 * @memberof FilterLoader
 	 */
 	load (filename) {
 		// Load filter content using JSON loader
@@ -27,7 +36,7 @@ class FilterLoader extends DirectoryJsonLoader {
 
 		// Construct stage instaces from filter content
 		const stages = content.stages.map(
-			(s, index) => new Stage(index, s.target, s.conditions, s.mode)
+			(s, index) => new Stage(index, s.target, s.mode, s.conditions)
 		);
 
 		// Create filter instance from filter contnet
@@ -41,5 +50,4 @@ class FilterLoader extends DirectoryJsonLoader {
 	}
 }
 
-// Export class as static object
 export default new FilterLoader();

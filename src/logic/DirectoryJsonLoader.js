@@ -2,11 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import parseJson from 'parse-json';
 
+/**
+ * Loader capable of loading and parsing JSON files from it's workplace location
+ *
+ * @export
+ * @class DirectoryJsonLoader
+ */
 export default class DirectoryJsonLoader {
 	/**
-	 * Create a JSON directory loader at given locaiton
-	 * Can be used to load json files
-	 * @param  {String} location Directory the reader should read from
+	 * Creates an instance of DirectoryJsonLoader.
+	 * @param {path} location A path to directory the reader should read from
+	 * @memberof DirectoryJsonLoader
 	 */
 	constructor (location) {
 		this._location = location;
@@ -18,8 +24,10 @@ export default class DirectoryJsonLoader {
 	}
 
 	/**
-	 * Return current working directory
-	 * @return {String} Working directory path
+	 * A path to current working directory
+	 *
+	 * @readonly
+	 * @memberof DirectoryJsonLoader
 	 */
 	get location () {
 		return this._location;
@@ -27,8 +35,10 @@ export default class DirectoryJsonLoader {
 
 	/**
 	 * Read file at loction and try to parse it as a JSON file
-	 * @param  {String} location Path to file to read
-	 * @return {Object}          JSON object parsed from the file
+	 *
+	 * @param {String} location Path to file to read
+	 * @returns Object
+	 * @memberof DirectoryJsonLoader
 	 */
 	_read (location) {
 		return parseJson(
@@ -39,7 +49,9 @@ export default class DirectoryJsonLoader {
 
 	/**
 	 * Return filenames of all .json files in working directory
-	 * @return {Array} Array of filenames to all .json files in working directory without .json extension
+	 *
+	 * @returns {Array} Array of filenames to all .json files in working directory without .json extension
+	 * @memberof DirectoryJsonLoader
 	 */
 	getFiles () {
 		return fs
@@ -50,8 +62,10 @@ export default class DirectoryJsonLoader {
 
 	/**
 	 * Load JSON file from working directory
-	 * @param  {String} filename Name of file to load without extension
-	 * @return {Object}          JSON object parsed from the file
+	 *
+	 * @param {String} filename Name of file to load without extension
+	 * @returns {Object}
+	 * @memberof DirectoryJsonLoader
 	 */
 	load (filename) {
 		return this._read(
