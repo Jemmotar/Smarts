@@ -2,28 +2,18 @@ import path from 'path';
 import watch from 'node-watch';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import reduxCatch from 'redux-catch';
 
-import FilterLoader from '../logic/filter/FilterLoader.js';
-import TrapLoader from '../logic/trap/TrapLoader.js';
-import { loadFilter, loadTrap, selectTrap, selectFilter, removeFilter, removeTrap, addError, clearErrors } from './actions';
+import FilterLoader from 'logic/filter/FilterLoader.js';
+import TrapLoader from 'logic/trap/TrapLoader.js';
 
-import reducers from './reducers';
+import { loadFilter, selectFilter, removeFilter } from 'ducks/filter.js';
+import { loadTrap, selectTrap, removeTrap } from 'ducks/trap.js';
+import { clearErrors } from 'ducks/errors.js';
+import store from 'ducks';
+
 import HmrContainer from './containers/HmrContainer.js';
 import App from './components/App.jsx';
-
-// Application store
-const store = createStore(reducers, applyMiddleware(
-	reduxCatch(errorHandler)
-));
-
-// Error hander for Redux catch
-function errorHandler (error, getState, lastAction, dispatch) {
-	console.error(error);
-	dispatch(addError(error));
-}
 
 // Watch for changes in filter folder
 watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
@@ -35,7 +25,7 @@ watch(FilterLoader.location, { filter: /\.json$/ }, (e, filename) => {
 			const state = store.getState();
 			store.dispatch(clearErrors());
 			store.dispatch(loadFilter(filename));
-			store.dispatch(selectFilter(state.app.filter.activeFilter.id));
+			store.dispatch(selectFilter(state.filter.activeFilter.id));
 			store.dispatch(selectTrap(state.app.trap.active === null ? null : state.app.trap.active.id));
 			return;
 

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Footer from './../components/Footer.jsx';
-import { removeError } from './../actions';
+import { removeError } from 'ducks/errors.js';
 
 function mapStateToProps (state) {
 	return {
-		errors: state.app.error.list
+		errors: state.errors.list
 	};
 }
 

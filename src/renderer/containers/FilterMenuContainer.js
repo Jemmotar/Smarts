@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 import FilterMenu from './../components/FilterMenu.jsx';
-import { selectFilter, toggleTrapSidebar } from './../actions';
+
+import { selectFilter } from 'ducks/filter.js';
+import { toggleTrapSidebar } from 'ducks/trap.js';
 
 function mapStateToProps (state) {
 	return {
-		filters: state.app.filter.list,
-		activeFilter: state.app.filter.activeFilter,
-		evaluations: state.app.evaluation.list
+		filters: state.filter.list,
+		activeFilter: state.filter.activeFilter,
+		evaluations: state.evaluation.list
 	};
 }
 

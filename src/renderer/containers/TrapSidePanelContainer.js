@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import TrapSidePanel from './../components/TrapSidePanel.jsx';
-import { selectTrap } from './../actions';
+import { selectTrap } from 'ducks/trap.js';
 
 function mapStateToProps (state) {
 	return {
-		isOpen: state.app.trap.isSidebarOpen,
-		traps: state.app.trap.list,
-		activeTrap: state.app.trap.active,
-		activeStage: state.app.filter.activeStage
+		isOpen: state.trap.isSidebarOpen,
+		traps: state.trap.list,
+		activeTrap: state.trap.active,
+		activeStage: state.filter.activeStage
 	};
 }
 

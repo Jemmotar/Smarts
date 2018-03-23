@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import StageMenu from './../components/StageMenu.jsx';
-import { selectStage } from './../actions';
+import { selectStage } from 'ducks/filter.js';
 
 function mapStateToProps (state) {
 	return {
-		activeFilter: state.app.filter.activeFilter,
-		activeStage: state.app.filter.activeStage,
-		evaluation: state.app.evaluation.active
+		activeFilter: state.filter.activeFilter,
+		activeStage: state.filter.activeStage,
+		evaluation: state.evaluation.active
 	};
 }
 

@@ -26,6 +26,13 @@ export default {
 		__filename: true
 	},
 
+	resolve: {
+		alias: {
+			'logic': path.join(root, 'src/logic'),
+			'ducks': path.join(root, 'src/renderer/ducks')
+		}
+	},
+
 	module: {
 		rules: [
 			{

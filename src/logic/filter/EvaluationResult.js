@@ -155,8 +155,6 @@ export class EvaluationResult {
 		this._passed = Object.values(this.results).every(
 			(s) => s.passed === true
 		);
-
-		console.log(this);
 	};
 }
 
