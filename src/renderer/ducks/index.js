@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import reduxCatch from 'redux-catch';
 
@@ -16,9 +16,12 @@ const reducers = combineReducers({
 
 export default createStore(
 	reducers,
-	applyMiddleware(
-		reduxCatch(errorHandler),
-		reduxThunk
+	compose(
+		applyMiddleware(
+			reduxCatch(errorHandler),
+			reduxThunk
+		),
+		window.devToolsExtension ? window.devToolsExtension() : f => f
 	)
 );
 

@@ -9,7 +9,7 @@ const TRAP_SIDEBAR_TOGGLE = 'smarts/trap/sidebar/TOGGLE';
 
 // Reducer
 const initialState = {
-	list: [],
+	list: TrapLoader.getFiles().map((file) => TrapLoader.load(file)),
 	active: null,
 	isSidebarOpen: false
 };

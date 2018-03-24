@@ -1,5 +1,5 @@
 import FilterLoader from 'logic/filter/FilterLoader.js';
-import { setActiveFromFilter, clearEvaluations, evaluate } from 'ducks/evaluation.js';
+import { setActiveFromFilter, clearEvaluations } from 'ducks/evaluation.js';
 
 // Actions
 const FILTER_SELECT = 'smarts/filter/SELECT';
@@ -8,10 +8,14 @@ const FILTER_REMOVE = 'smarts/filter/REMOVE';
 const FILTER_STAGE_SELECT = 'smarts/filter/stage/SELECT';
 
 // Reducer
+const filters = FilterLoader.getFiles().map((file) => FilterLoader.load(file));
+const hasFilter = filters && filters.length > 0;
+const hasStage = hasFilter && filters[0].stages && filters[0].stages.length > 0;
+
 const initialState = {
-	list: [],
-	activeFilter: null,
-	activeStage: null
+	list: filters,
+	activeFilter: hasFilter ? filters[0] : null,
+	activeStage: hasStage ? filters[0].stages[0] : null
 };
 
 export default function reducer (state = initialState, action = {}) {
