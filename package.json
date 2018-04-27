@@ -1,6 +1,6 @@
 {
   "name": "smarts",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Evaluation simulator for Smarts Network Filters solution",
   "main": "main.bundle.js",
   "scripts": {
@@ -19,20 +19,24 @@
     "react",
     "redux"
   ],
-  "author": "Filipsi,Jemmotar",
+  "author": "Filip Šikula <filip.sikula@seznam.cz> (https://github.com/Filipsi)",
+  "contributors": [
+    "Jiří Višinka <visinka.j@gmail.com> (https://github.com/Jemmotar)"
+  ],
   "license": "GPL-3.0",
   "dependencies": {
     "deep-freeze": "0.0.1",
+    "hoek": "^5.0.3",
     "node-watch": "^0.5.5",
     "parse-json": "^4.0.0",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
+    "redux": "^4.0.0",
     "redux-catch": "^1.3.1",
     "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.76.0",
+    "semantic-ui-react": "^0.79.1",
     "source-map-support": "^0.5.0"
   },
   "devDependencies": {
@@ -48,7 +52,7 @@
     "css-loader": "^0.28.11",
     "electron": "^1.8.4",
     "electron-devtools-installer": "^2.2.1",
-    "electron-packager": "^11.1.0",
+    "electron-packager": "^12.0.1",
     "eslint": "^4.18.1",
     "eslint-config-happiness": "^10.2.1",
     "eslint-plugin-import": "^2.9.0",
@@ -60,7 +64,7 @@
     "react-hot-loader": "^4.0.0",
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.6.2",
-    "style-loader": "^0.20.3",
+    "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",
